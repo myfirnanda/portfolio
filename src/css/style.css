@@ -1,0 +1,74 @@
+html, body {
+    scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6, p, a, li, span, label, ul, li {
+    font-family: 'Oxanium', sans-serif;
+}
+
+section#profile {
+    background-size: cover; background-position: center; background-color: rgba(0, 0, 0, 0.5); background-blend-mode: multiply;
+}
+
+.typing-text {
+    white-space: nowrap;
+    overflow: hidden;
+    color: #fff;
+    margin-right: 5px;
+}
+
+.caret {
+    border-right: .15em solid rgb(192 38 211);
+    animation: blink 1s infinite;
+}
+
+h3.line-heading::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 75%;
+    height: 3px;
+    background-color: rgb(192 38 211);
+}
+
+h3.line-heading-center::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 75%;
+    height: 3px;
+    background-color: rgb(192 38 211);
+    transform: translateX(-50%);
+}
+
+.animate-up-down {
+    animation: up-down 5s infinite;
+}
+
+/* ===== Animation ===== */
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes up-down {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,188 @@
+export const personalData = {
+        experiences: [
+            {
+                id: 1,
+                position: 'Web Developer',
+                status: 'Internship',
+                companyName: 'PT Sultan Langit Teknologi Nusantara',
+                companyLink: 'https://www.linkedin.com/company/ptsltn/',
+                startDate: 'Jan 2023',
+                endDate: 'Apr 2023',
+                techStack: ["PHP", "Wordpress", "Bootstrap"],
+            },
+            {
+                id: 2,
+                position: 'Fullstack Programmer',
+                status: 'Internship',
+                companyName: 'Infaq Management Agency',
+                companyLink: '',
+                startDate: 'Feb 2024',
+                endDate: 'Jun 2024',
+                techStack: ["Laravel", "React.JS", "CodeIgniter", "MySQL"],
+            },
+            {
+                id: 3,
+                position: 'IT Support',
+                status: 'Internship',
+                companyName: 'PT Kadar Baru Berkah',
+                companyLink: '',
+                startDate: 'Dec 2023',
+                endDate: 'Present',
+                techStack: ["PHP", "Javascript", "JQuery", "MySQL", "Bootstrap"],
+            },            
+        ],
+        skills: {
+            frameworks: [
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/5u8meb8mghnkbvucx1cui/laravel.webp?rlkey=54lyn9udrvi4xwn75aklcs40v&st=ac59uzkd&dl=0',
+                    name: 'Laravel',
+                    width: '70',
+                    height: '60',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/j16x05kx6llxes6gmebi0/react.webp?rlkey=iobv7h44hwdclrkm4zj3e4cgf&st=0vw2yu00&dl=0',
+                    name: 'React.JS',
+                    width: '70',
+                    height: '60',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/h5os8rhqujyn6vphyr2r9/express.webp?rlkey=8shhjkkm9umo40sugern7qydb&st=lbtmwknd&dl=0',
+                    name: 'Express.JS',
+                    width: '70',
+                    height: '60',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/v43ifptg26hxki8gbyvxb/spring.webp?rlkey=w1fv6ukithwk748j7x5rd01cz&st=4dm3haun&dl=0',
+                    name: 'Spring Boot',
+                    width: '70',
+                    height: '60',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/j87k7fbfrkaourfvjxtko/codeigniter.webp?rlkey=e0guqxztfthqjigd0t1tuyoou&st=qj89pcrw&dl=0',
+                    name: 'CodeIgniter',
+                    width: '60',
+                    height: '60',
+                }
+            ],
+            programmingLanguage: [
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/yuo2b2bal4izmumfppea9/js.webp?rlkey=um9qsf8t95826x2zhvrzy6ret&st=0m63yvvi&dl=0',
+                    name: 'Javascript',
+                    width: '60',
+                    height: '40',
+                },
+                {
+                    id: 2,
+                    image: 'https://www.dropbox.com/scl/fi/mvt9tc53aj38vt5fplf7b/php.webp?rlkey=0oqlli550zho1k2dsr73ha63t&st=jk72i5sp&dl=0',
+                    name: 'PHP',
+                    width: '100',
+                    height: '40',
+                },
+                {
+                    id: 3,
+                    image: 'https://www.dropbox.com/scl/fi/8vsy7rz7qcczw5ckipzlb/java.webp?rlkey=bt9srtoojwlw7w4dql7cet23f&st=6uz8psrb&dl=0',
+                    name: 'Java',
+                    width: '40',
+                    height: '60',
+                }
+            ],
+            databases: [
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/hv1lni1dr6opubfxv2a0t/mysql.webp?rlkey=0z85vg4wtkivl7swpvqpkursr&st=6ylratei&dl=0',
+                    name: 'MySQL',
+                    width: '100',
+                    height: '40',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/ulujv6ldejb6pxw2dnt8v/postgresql.webp?rlkey=d99cre1ilngirl58unlfn7irw&st=gcfbovkk&dl=0',
+                    name: 'PostgreSQL',
+                    width: '60',
+                    height: '40',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/8z32mc8h4kdf0iu58ju5c/mongodb.webp?rlkey=zvj6q9058ggqeomsp2z76s43q&st=5vhgfky2&dl=0',
+                    name: 'MongoDB',
+                    width: '40',
+                    height: '60',
+                }
+            ],
+            other: [
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/7a6f0ukrm1fordem3vv0l/git.webp?rlkey=ndsw5ryvy1ptd67hgis63klmi&st=qgyoifg5&dl=0',
+                    name: 'Git',
+                    width: '70',
+                    height: '50',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/jqn8ij0y4jof0zqhqf9iv/postmanapi.webp?rlkey=jq1bpmp7waj6cdvgtnsm1ovwu&st=v7p0bi05&dl=0',
+                    name: 'Postman API',
+                    width: '70',
+                    height: '50',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/jlgfuzdir6gd04iiqbmic/node.webp?rlkey=0ybt4myin5ebxuu3wd5if3ees&st=ul7l8g81&dl=0',
+                    name: 'Node.JS',
+                    width: '60',
+                    height: '60',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/l2byqx76ohp2bc3vdpqoc/docker.webp?rlkey=wcabtldy4f53q2ys7g79jzqfv&st=dgn2yl0l&dl=0',
+                    name: 'Docker',
+                    width: '60',
+                    height: '60',
+                },
+                {
+                    id: 1,
+                    image: 'https://www.dropbox.com/scl/fi/gv1mnlv0bvidup0q0phih/gcp.webp?rlkey=yb8oc5sdakqyjlun9h3crd2l7&st=djjmcnlt&dl=0',
+                    name: 'Google Cloud Platform',
+                    width: '80',
+                    height: '60',
+                },
+            ],
+        },
+        educations: [
+            {
+                id: 1,
+                companyName: '',
+                companyLink: '',
+                companyPlace: '',
+                startDate: '',
+                endDate: '',
+                description: [],
+                techStack: [],
+            },
+        ],
+        projects: [
+            {
+                id: 1,
+                image: '',
+                title: '',
+                link: '',
+                description: '',
+                techStack: [],
+                linkGithub: '',
+                linkPreview: '',
+            },
+        ],
+        certificates: [
+            {
+                id: 1,
+                image: '',
+                title: '',
+                link: '',
+            },
+        ],
+};
