@@ -5,14 +5,16 @@ import ContentExperience from "./ContentExperience";
 import ContentProject from "./ContentProject";
 import ContentSkill from "./ContentSkill";
 
+import { personalData } from "../utils/personalData";
+
 const SectionMenuContent = () => {
     return (
         <div id="content" className="col-span-9 w-full relative">
-            <ContentExperience />
-            <ContentSkill />
+            <ContentExperience experiences={personalData.experiences} />
+            <ContentSkill skills={personalData.skills} />
             <ContentEducation />
-            <ContentProject />
-            <ContentCertificate />
+            <ContentProject projects={personalData.projects} />
+            <ContentCertificate certificates={personalData.certificates} />
             <ContentContact />
         </div>
     )

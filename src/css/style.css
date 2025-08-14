@@ -72,3 +72,13 @@ h3.line-heading-center::after {
         transform: translateY(0);
     }
 }
+
+.blinking-cursor {
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
