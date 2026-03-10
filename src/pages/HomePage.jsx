@@ -3,7 +3,7 @@ import SectionMenu from "../components/SectionMenu"
 import SectionProfile from "../components/SectionProfile"
 import BackToTop from "../components/BackToTop"
 
-const Main = () => {
+const HomePage = () => {
     return (
         <main>
             <SectionProfile />
@@ -14,4 +14,4 @@ const Main = () => {
     )
 }
 
-export default Main
+export default HomePage

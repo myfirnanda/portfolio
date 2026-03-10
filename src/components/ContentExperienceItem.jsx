@@ -1,26 +1,112 @@
-const ContentExperienceItem = ({ image, title, position, status, companyName, companyLink, startDate, endDate, techStack }) => {
+import { useState } from 'react';
+
+const ContentExperienceItem = ({ image, title, position, status, companyName, companyLink, startDate, endDate, techStack, description, index }) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+    
+    // Dynamic color palette - easily extensible
+    const colorPalette = [
+        { dot: 'bg-pink-500', border: 'border-pink-500/50', shadow: 'shadow-pink-500/30', badge: 'bg-pink-900/50 border-pink-500/50', text: 'text-pink-300', bullet: 'bg-pink-500' },
+        { dot: 'bg-fuchsia-500', border: 'border-fuchsia-500/50', shadow: 'shadow-fuchsia-500/30', badge: 'bg-fuchsia-900/50 border-fuchsia-500/50', text: 'text-fuchsia-300', bullet: 'bg-fuchsia-500' },
+        { dot: 'bg-purple-500', border: 'border-purple-500/50', shadow: 'shadow-purple-500/30', badge: 'bg-purple-900/50 border-purple-500/50', text: 'text-purple-300', bullet: 'bg-purple-500' },
+        { dot: 'bg-violet-500', border: 'border-violet-500/50', shadow: 'shadow-violet-500/30', badge: 'bg-violet-900/50 border-violet-500/50', text: 'text-violet-300', bullet: 'bg-violet-500' },
+        { dot: 'bg-indigo-500', border: 'border-indigo-500/50', shadow: 'shadow-indigo-500/30', badge: 'bg-indigo-900/50 border-indigo-500/50', text: 'text-indigo-300', bullet: 'bg-indigo-500' },
+        { dot: 'bg-rose-500', border: 'border-rose-500/50', shadow: 'shadow-rose-500/30', badge: 'bg-rose-900/50 border-rose-500/50', text: 'text-rose-300', bullet: 'bg-rose-500' },
+        { dot: 'bg-cyan-500', border: 'border-cyan-500/50', shadow: 'shadow-cyan-500/30', badge: 'bg-cyan-900/50 border-cyan-500/50', text: 'text-cyan-300', bullet: 'bg-cyan-500' },
+        { dot: 'bg-teal-500', border: 'border-teal-500/50', shadow: 'shadow-teal-500/30', badge: 'bg-teal-900/50 border-teal-500/50', text: 'text-teal-300', bullet: 'bg-teal-500' },
+        { dot: 'bg-emerald-500', border: 'border-emerald-500/50', shadow: 'shadow-emerald-500/30', badge: 'bg-emerald-900/50 border-emerald-500/50', text: 'text-emerald-300', bullet: 'bg-emerald-500' },
+        { dot: 'bg-amber-500', border: 'border-amber-500/50', shadow: 'shadow-amber-500/30', badge: 'bg-amber-900/50 border-amber-500/50', text: 'text-amber-300', bullet: 'bg-amber-500' },
+    ];
+    
+    // Safely get color scheme with modulo fallback
+    const colorScheme = colorPalette[index % colorPalette.length];
+    
     return (
-        <div class="relative w-full">
-            <div class="rounded-full absolute -top-0.5 z-10 -ml-3.5 h-6 w-6 rounded-full bg-fuchsia-700"></div>
-            <div class="ml-6">
-                <div class="profesional-item">
-                    <div class="company-description">
-                    <div class="flex justify-between">
-                        <h4 class="text-2xl">{position} - <span class="text-gray-400">{status}</span></h4>
-                        <h4 class="text-xl">{startDate} - {endDate}</h4>
-                    </div>
-                    <div class="job text-xl mt-1 mb-3">
-                        <a href={companyLink} target="_blank" rel="noreferrer" class="inline-block">
-                            <h4>{companyName}</h4>
+        <div className="relative group">
+            {/* Timeline Dot */}
+            <div className={`hidden md:flex absolute left-6 top-6 w-5 h-5 ${colorScheme.dot} rounded-full border-4 border-black z-10 group-hover:scale-125 transition-transform duration-300 shadow-lg`}></div>
+            
+            {/* Card */}
+            <div className={`md:ml-16 bg-gradient-to-br from-zinc-900 to-zinc-800/50 rounded-xl p-5 sm:p-6 md:p-8 border border-zinc-700 hover:${colorScheme.border} transition-all duration-300 hover:shadow-2xl hover:${colorScheme.shadow}`}>
+                {/* Header */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-4 mb-4">
+                    <div className="flex-1">
+                        <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">
+                            {position}
+                        </h4>
+                        <a href={companyLink} 
+                           target="_blank" 
+                           rel="noreferrer" 
+                           className={`inline-flex items-center gap-2 text-base sm:text-lg ${colorScheme.text} hover:underline transition-all duration-200 group/link`}>
+                            <i className="ri-building-line"></i>
+                            <span className="font-semibold">{companyName}</span>
+                            <i className="ri-external-link-line text-sm opacity-0 group-hover/link:opacity-100 transition-opacity"></i>
                         </a>
                     </div>
-                    <div id="tech-used" class="flex gap-2">
-                        {techStack.map(stack => {
+                    <div className="flex flex-col gap-2">
+                        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${colorScheme.badge} border text-xs sm:text-sm font-semibold`}>
+                            <i className="ri-time-line"></i>
+                            <span>{status}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Date */}
+                <div className="flex items-center gap-2 mb-5 pb-4 border-b border-zinc-700/50">
+                    <i className="ri-calendar-line text-gray-400"></i>
+                    <span className="text-sm sm:text-base text-gray-400">{startDate} - {endDate}</span>
+                </div>
+                
+                {/* Job Description - Collapsible */}
+                {description && description.length > 0 && (
+                    <div className="mb-6">
+                        {/* Dropdown Trigger */}
+                        <button
+                            onClick={() => setIsExpanded(!isExpanded)}
+                            className="w-full flex items-center justify-between gap-2 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 transition-all duration-200 group/dropdown"
+                        >
+                            <div className="flex items-center gap-2">
+                                <i className="ri-file-list-3-line text-lg text-gray-400 group-hover/dropdown:text-gray-300"></i>
+                                <h5 className="text-sm font-semibold text-gray-300 group-hover/dropdown:text-white">Key Responsibilities</h5>
+                                {/* <span className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">
+                                    ({description.length} items)
+                                </span> */}
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <span className="text-xs text-gray-500 group-hover/dropdown:text-gray-400 hidden sm:inline">
+                                    {isExpanded ? 'Click to hide' : 'Click to view'}
+                                </span>
+                                <i className={`ri-arrow-${isExpanded ? 'up' : 'down'}-s-line text-xl ${colorScheme.text} transition-transform duration-200 ${isExpanded ? 'rotate-0' : ''}`}></i>
+                            </div>
+                        </button>
+                        
+                        {/* Dropdown Content */}
+                        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
+                            <ul className="space-y-2.5 pl-3">
+                                {description.map((desc, idx) => (
+                                    <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-gray-300 leading-relaxed">
+                                        <div className={`w-1.5 h-1.5 ${colorScheme.bullet} rounded-full mt-2 flex-shrink-0`}></div>
+                                        <span>{desc}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                )}
+                
+                {/* Tech Stack */}
+                <div>
+                    <div className="flex items-center gap-2 mb-3">
+                        <i className="ri-code-s-slash-line text-lg text-gray-400"></i>
+                        <h5 className="text-sm font-semibold text-gray-300">Tech Stack:</h5>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                        {techStack.map((stack, idx) => {
                             return (
-                                <span class="text-xs font-semibold me-2 px-2.5 py-0.5 rounded border bg-fuchsia-800 border-fuchsia-400">{stack}</span>
+                                <span key={idx} className={`text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg ${colorScheme.badge} border transition-all duration-200 hover:scale-105`}>
+                                    {stack}
+                                </span>
                             )
                         })}
-                    </div>
                     </div>
                 </div>
             </div>

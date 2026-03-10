@@ -9,6 +9,11 @@ export const personalData = {
                 startDate: 'Jan 2023',
                 endDate: 'Apr 2023',
                 techStack: ["PHP", "Wordpress", "Bootstrap"],
+                description: [
+                    "Responsible for creating WordPress themes using HTML, CSS, JS, PHP, and Bootstrap ensuring theme functionality works well and implementing intuitive and responsive designs.",
+                    "Lead a team of 4 members, coordinating tasks for each team member to complete the project over a 4-month period, and ensuring that every aspect of WordPress theme development adheres to established project standards.",
+                    "Developing unique and responsive theme user interface (UI) designs, with a focus on intuitive user experience (UX) and attractive aesthetics",
+                ],
             },
             {
                 id: 2,
@@ -19,6 +24,12 @@ export const personalData = {
                 startDate: 'Feb 2024',
                 endDate: 'Jun 2024',
                 techStack: ["Laravel", "React.JS", "CodeIgniter", "MySQL"],
+                description: [
+                    "Developing an asset management dashboard for the Directorate of Resources using CodeIgniter 3 and Bootstrap, enabling internal teams to efficiently manage assets.",
+                    "Collaborating with mobile developers to develop the MyLMI mobile app, responsible for developing and maintaining the REST API using Laravel, ensuring seamless integration and functionality.",
+                    "Revamping the institute's blog interface and creating a new dashboard using Laravel, Inertia.js, React.js, and Tailwind CSS, enhancing the blog's visual appeal and user experience.",
+                    "Ensuring cross-browser compatibility and responsive design for the new blog interface, providing a consistent user experience across different devices and platforms."
+                ]
             },
             {
                 id: 3,
@@ -29,7 +40,37 @@ export const personalData = {
                 startDate: 'Dec 2023',
                 endDate: 'Dec 2024',
                 techStack: ["PHP", "Javascript", "JQuery", "MySQL", "Bootstrap"],
+                description: [
+                    "Resolved 74 backlog items, including over 25 bugs and the development of 49 new features, through effective debugging and strong analytical skills, enhancing system stability, functionality, and user experience.",
+                    "Refined 13 interface designs, improving the overall usability and visual appeal of the ERP application to create a more intuitive user experience.",
+                    "Optimized database queries and backend processes for improved performance and faster load times, while implementing DRY and KISS principles for maintainable, efficient, and reusable code."
+                ],
+            },
+            {
+                id: 4,
+                position: 'Web Developer',
+                status: 'Contract',
+                companyName: 'PT Wangta Agung',
+                companyLink: '',
+                startDate: 'Sep 2025',
+                endDate: 'Nov 2025',
+                techStack: ["PHP", "Javascript", "JQuery", "MySQL", "Bootstrap"],
+                description: [
+                    "Built a production-grade B2B commerce platform using Laravel, covering authentication, product catalog, ordering workflow, and structured role-based access control with a responsive and user-focused interface.",
+                    "Designed system architecture from scratch and implemented automated testing (Pest unit & integration tests), performance optimizations (eager/lazy loading, pagination, asset compression), and security best practices.",
+                    "Managed infrastructure and deployment lifecycle end-to-end, including VPS provisioning (Linux, Nginx, SSL, monitoring) and automated CI/CD workflows using GitHub Actions."
+                ],
             },            
+            {
+                id: 5,
+                position: 'Fullstack Developer',
+                status: 'Full-time',
+                companyName: 'PT Hexavara Nawasena Teknologi',
+                companyLink: '',
+                startDate: 'Dec 2025',
+                endDate: 'Now',
+                techStack: ["Laravel", "React.JS", "Typescript", "Nest.JS"],
+            },
         ],
         skills: {
             frameworks: [
@@ -63,6 +104,13 @@ export const personalData = {
                 },
                 {
                     id: 5,
+                    image: 'https://www.dropbox.com/scl/fi/o13cnm0uhob30xidft0qh/nest.webp?rlkey=jul0aa395axrtnop56uv6xu8o&st=yfdpdbxl&raw=1',
+                    name: 'Nest.JS',
+                    width: '40',
+                    height: '60',
+                },
+                {
+                    id: 6,
                     image: 'https://www.dropbox.com/scl/fi/j87k7fbfrkaourfvjxtko/codeigniter.webp?rlkey=e0guqxztfthqjigd0t1tuyoou&st=qj89pcrw&raw=1',
                     name: 'CodeIgniter',
                     width: '60',
@@ -176,52 +224,121 @@ export const personalData = {
             {
                 id: 1,
                 image: 'https://dl.dropboxusercontent.com/scl/fi/0niqiy1zmye988x7derxp/sltn_page.webp?rlkey=37r3pgi9esno9ii6exy4uwgu9&st=qz2x5whi&dl=1',
+                images: [
+                    'https://dl.dropboxusercontent.com/scl/fi/0niqiy1zmye988x7derxp/sltn_page.webp?rlkey=37r3pgi9esno9ii6exy4uwgu9&st=qz2x5whi&dl=1',
+                ],
                 title: 'Job Portal Wordpress Theme',
                 link: '',
                 description: 'Tema WordPress untuk portal lowongan kerja di PT Sultan Langit Teknologi Nusantara, menggunakan HTML, CSS, JS, PHP, dan Bootstrap. Memudahkan pencari kerja menemukan lowongan sesuai kriteria.',
+                detailedDescription: 'Custom WordPress theme development untuk job portal PT Sultan Langit Teknologi Nusantara. Project ini menggunakan HTML, CSS, JavaScript, PHP, dan Bootstrap untuk membuat tema yang responsive dan user-friendly. Tema ini dilengkapi dengan fitur pencarian lowongan kerja, filter berdasarkan kategori, lokasi, dan tipe pekerjaan, serta sistem aplikasi online yang terintegrasi.',
+                features: [
+                    'Responsive design untuk semua device',
+                    'Advanced job search & filtering system',
+                    'Online application form integration',
+                    'Admin dashboard untuk job posting management',
+                    'SEO optimized structure'
+                ],
                 techStack: ['PHP', 'Wordpress', 'Bootstrap'],
                 linkGithub: 'https://github.com/myfirnanda/magang-SLTN_web-job-portal',
                 linkPreview: '',
+                role: 'Lead Developer & UI/UX Designer',
+                duration: '4 months',
             },
             {
                 id: 2,
                 image: 'https://dl.dropboxusercontent.com/scl/fi/7vlr300y2p0icnzfo5xf1/simenta_TaskList.webp?rlkey=gia5gs8v3qnr49hv4x8ak9dtd&st=vedntlbk&dl=1',
+                images: [
+                    'https://dl.dropboxusercontent.com/scl/fi/7vlr300y2p0icnzfo5xf1/simenta_TaskList.webp?rlkey=gia5gs8v3qnr49hv4x8ak9dtd&st=vedntlbk&dl=1',
+                ],
                 title: 'SIMENTA - Task Management App',
                 link: '',
                 description: 'Sistem manajemen tugas untuk mahasiswa, dibangun dengan Node.js, Express.js, Sequelize.js, MySQL, dan Bootstrap. Memudahkan pengelolaan, pelacakan, dan pemantauan tugas akademik.',
+                detailedDescription: 'SIMENTA adalah aplikasi web task management yang dirancang khusus untuk mahasiswa dalam mengelola tugas-tugas akademik mereka. Dibangun menggunakan Node.js, Express.js, Sequelize.js, MySQL, dan Bootstrap untuk memberikan interface yang intuitif dan performa yang optimal.',
+                features: [
+                    'Task creation and assignment management',
+                    'Deadline tracking dengan reminder notification',
+                    'Priority level categorization',
+                    'Progress tracking dashboard',
+                    'Collaborative task sharing'
+                ],
                 techStack: ['Node.JS', 'Sequelize.JS', 'MySQL', 'Bootstrap'],
                 linkGithub: 'https://github.com/myfirnanda/magang-SLTN_web-job-portal',
                 linkPreview: '',
+                role: 'Fullstack Developer',
+                duration: '3 months',
             },
             {
                 id: 4,
                 image: 'https://dl.dropboxusercontent.com/scl/fi/gkqh0l41ohook0di40ub4/1687679763706.jpg?rlkey=vc96v6fr9o6ezkcdae5do4hmc&st=rs1vnyew&dl=1',
+                images: [
+                    'https://dl.dropboxusercontent.com/scl/fi/gkqh0l41ohook0di40ub4/1687679763706.jpg?rlkey=vc96v6fr9o6ezkcdae5do4hmc&st=rs1vnyew&dl=1',
+                ],
                 title: 'SIPINKU - Book Loan Application',
                 link: '',
                 description: 'Aplikasi web peminjaman buku berbasis Node.js dan MongoDB. Fitur mencakup registrasi, autentikasi, manajemen buku, sewa & pengembalian, denda keterlambatan, serta pengelolaan peran admin dan pengguna.',
+                detailedDescription: 'SIPINKU adalah aplikasi web library management system yang memudahkan proses peminjaman dan pengembalian buku. Sistem ini dibangun dengan Node.js dan MongoDB untuk menangani transaksi dan manajemen data yang efisien dengan role-based access control.',
+                features: [
+                    'User registration & authentication system',
+                    'Book catalog dengan search & filter',
+                    'Loan & return transaction management',
+                    'Automated late fee calculation',
+                    'Admin & user role management',
+                    'Transaction history tracking'
+                ],
                 techStack: ['Node.JS', 'MongoDB', 'EJS'],
                 linkGithub: '',
                 linkPreview: '',
+                role: 'Fullstack Developer',
+                duration: '2 months',
             },
             {
                 id: 5,
                 image: 'https://dl.dropboxusercontent.com/scl/fi/7q0jdi8zioob36n552gsx/eatwise_1712848245564-1.jpg?rlkey=7gqnooo0lib2wvb9j9nz1m09f&st=gs5j8ulb&dl=1',
+                images: [
+                    'https://dl.dropboxusercontent.com/scl/fi/7q0jdi8zioob36n552gsx/eatwise_1712848245564-1.jpg?rlkey=7gqnooo0lib2wvb9j9nz1m09f&st=gs5j8ulb&dl=1',
+                ],
                 title: 'Eatwise - Vegan Diet Journal & Recipe Explorer App',
                 link: '',
                 description: 'Aplikasi mobile untuk mengatasi obesitas di Indonesia, fokus pada pola makan vegan dan mindful eating. Fitur unggulan: deteksi bahan dari gambar, rekomendasi resep vegan personal, pelacakan kalori, dan edukasi gaya hidup sehat.',
+                detailedDescription: 'Eatwise adalah aplikasi mobile health-tech yang fokus pada promosi gaya hidup sehat melalui pola makan vegan dan mindful eating. Aplikasi ini menggunakan machine learning untuk deteksi bahan makanan dari gambar dan memberikan rekomendasi resep yang dipersonalisasi. Backend API dibangun dengan Node.js dan deployed di Google Cloud Platform.',
+                features: [
+                    'Image recognition untuk ingredient detection',
+                    'Personalized vegan recipe recommendations',
+                    'Calorie & nutrition tracking',
+                    'Daily meal journal & progress analytics',
+                    'Educational content tentang healthy lifestyle',
+                    'Community sharing & social features'
+                ],
                 techStack: ['Node.JS', 'Sequelize.JS', 'GCP', 'MySQL'],
                 linkGithub: '',
                 linkPreview: '',
+                role: 'Backend Developer',
+                duration: '6 months',
             },
             {
                 id: 6,
                 image: 'https://dl.dropboxusercontent.com/scl/fi/wkiwomdw6e9i2l2tqpkvq/lmi_1723005715434.webp?rlkey=h6570wu3tyvuua44kycp6i1rq&st=vq7a3q7g&dl=1',
+                images: [
+                    'https://dl.dropboxusercontent.com/scl/fi/wkiwomdw6e9i2l2tqpkvq/lmi_1723005715434.webp?rlkey=h6570wu3tyvuua44kycp6i1rq&st=vq7a3q7g&dl=1',
+                ],
                 title: 'LMI Blog & CMS Dashboard',
                 link: '',
                 description: 'Website informasi dan artikel kegiatan LMI dengan dashboard CMS untuk kelola konten (buat, edit, publikasi). Backend pakai Laravel, frontend React, dilengkapi fitur keamanan dan optimasi performa untuk pengalaman pengguna yang lancar dan aman.',
+                detailedDescription: 'Platform blog dan content management system untuk Lembaga Manajemen Infaq (LMI). Project ini melakukan revamp complete dari interface blog lama dan membangun CMS dashboard yang powerful menggunakan Laravel, Inertia.js, React.js, dan Tailwind CSS. Sistem dilengkapi dengan fitur keamanan yang robust dan optimasi performa untuk handling traffic tinggi.',
+                features: [
+                    'Modern & responsive blog interface',
+                    'Powerful CMS dashboard untuk content management',
+                    'Rich text editor dengan media upload',
+                    'SEO optimization tools',
+                    'Role-based content approval workflow',
+                    'Analytics & engagement tracking',
+                    'Performance optimization & caching'
+                ],
                 techStack: ['Laravel', 'React.JS', 'MySQL', 'TailwindCSS'],
                 linkGithub: '',
                 linkPreview: '',
+                role: 'Fullstack Developer',
+                duration: '5 months',
             },
         ],
         certificates: [

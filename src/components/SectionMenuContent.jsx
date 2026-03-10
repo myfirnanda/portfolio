@@ -9,7 +9,7 @@ import { personalData } from "../utils/personalData";
 
 const SectionMenuContent = () => {
     return (
-        <div id="content" className="col-span-9 w-full relative">
+        <div id="content" className="col-span-1 lg:col-span-9 w-full relative">
             <ContentExperience experiences={personalData.experiences} />
             <ContentSkill skills={personalData.skills} />
             <ContentEducation />

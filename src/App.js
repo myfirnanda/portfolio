@@ -1,19 +1,27 @@
-import logo from './logo.svg';
 // import './App.css';
 import './css/style.css'
 // import './js/script.js'
 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './layouts/Header';
-import Main from './layouts/Main';
 import Footer from './layouts/Footer';
+import HomePage from './pages/HomePage';
+import ProjectsPage from './pages/ProjectsPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-    <body class="bg-black text-white">
-      <Header />
-      <Main />
-      <Footer />
-    </body>
+    <BrowserRouter>
+      <ScrollToTop />
+      <div className="bg-black text-white">
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+        </Routes>
+        <Footer />
+      </div>
+    </BrowserRouter>
   )
   // return (
   //   <div className="App">
