@@ -11,7 +11,7 @@ import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-    <BrowserRouter basename="/portfolio">
+    <BrowserRouter>
       <ScrollToTop />
       <div className="bg-black text-white">
         <Header />
