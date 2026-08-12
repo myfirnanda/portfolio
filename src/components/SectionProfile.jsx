@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Starfield from "./Starfield";
 
 const words = [
     "Software Engineer",
@@ -46,11 +47,8 @@ const SectionProfile = () => {
             className="w-full min-h-screen flex items-center relative overflow-hidden"
             style={{ backgroundImage: `url("https://www.dropbox.com/scl/fi/chofoaykmx3tpe05su51h/banner-bg.webp?rlkey=cmxv08hz6d5v92vqz7lavbfgu&st=7f35hfa4&raw=1")` }}
         >
-            {/* Shooting Stars - Bottom to Top */}
-            <div className="shooting-star shooting-star-profile-1"></div>
-            <div className="shooting-star shooting-star-profile-2"></div>
-            <div className="shooting-star shooting-star-profile-3"></div>
-            
+            <Starfield direction="up-right" density={0.9} meteorRate={1} maxMeteors={3} />
+
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
             

@@ -2,17 +2,15 @@ import { Link } from 'react-router-dom';
 import ContentProjectList from "../components/ContentProjectList";
 import BackToTop from "../components/BackToTop";
 import { personalData } from "../utils/personalData";
+import Starfield from "../components/Starfield";
 
 const ProjectsPage = () => {
     return (
         <main className="min-h-screen bg-black">
             {/* Header Section */}
             <section className="pt-24 pb-10 relative">
-                {/* Shooting Stars */}
-                <div className="shooting-star shooting-star-menu-1"></div>
-                <div className="shooting-star shooting-star-menu-2"></div>
-                <div className="shooting-star shooting-star-menu-3"></div>
-                
+                <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
+
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     {/* Back Button */}
                     <Link 
@@ -54,13 +52,8 @@ const ProjectsPage = () => {
             
             {/* Projects Grid */}
             <section className="pb-20 relative">
-                {/* Static Stars */}
-                <div className="static-star static-star-menu-1"></div>
-                <div className="static-star static-star-menu-2"></div>
-                <div className="static-star static-star-menu-3"></div>
-                <div className="static-star static-star-menu-4"></div>
-                <div className="static-star static-star-menu-5"></div>
-                
+                <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
+
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <ContentProjectList projects={personalData.projects} />
                 </div>
