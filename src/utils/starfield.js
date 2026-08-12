@@ -113,7 +113,10 @@ export const STAR_AREA_PER_STAR = 12000;
 // (it still saturates on extreme ultra-wide/very-tall combinations, which is
 // an acceptable, deliberate ceiling rather than an accidental one); 2,000
 // simple arc+fill draws per frame is still cheap for canvas 2D.
-export const STAR_COUNT_LIMITS = { min: 30, max: 2000 };
+// A per-frame budget, not a cosmetic limit: each star costs an arc(), a fill()
+// and a sin() every frame. Sections tall enough to hit this cap should be given
+// their own smaller Starfield rather than having the cap raised.
+export const STAR_COUNT_LIMITS = { min: 30, max: 400 };
 export const STAR_RADIUS = { min: 0.4, max: 1.4 };
 export const STAR_BASE_OPACITY = { min: 0.2, max: 0.7 };
 export const TWINKLE_SPEED = { min: 0.4, max: 1.2 }; // radians per second

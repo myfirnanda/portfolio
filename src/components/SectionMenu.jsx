@@ -1,13 +1,13 @@
 import SectionMenuAside from "./SectionMenuAside"
 import SectionMenuContent from "./SectionMenuContent"
-import Starfield from "./Starfield";
 
 const SectionMenu = () => {
     return (
         <>
+        {/* No Starfield here: the background-image div below is opaque and paints
+            over this section, so a canvas at this level is never visible. The
+            stars for this region live in ContentContact, which sits above it. */}
         <section id="menu" className="bg-black relative">
-            <Starfield direction="down-left" density={1.1} meteorRate={1.2} maxMeteors={5} />
-
             <div className="relative" style={{ backgroundImage: `url("https://www.dropbox.com/scl/fi/yjlqvwv7f9kbqbe0rzyr1/merged-img.webp?rlkey=8h0m4n1bz1keqp2e8zm8u0wvs&st=dj0hw4yk&raw=1")`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)', backgroundBlendMode: 'multiply' }}>
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 py-10">

@@ -207,6 +207,16 @@ describe('starCount', () => {
   test('responds to the density multiplier', () => {
     expect(starCount(1000, 1000, 2)).toBeGreaterThan(starCount(1000, 1000, 1));
   });
+
+  // Every star costs an arc() + fill() + a sin() on every frame, so the cap is
+  // a per-frame budget, not a cosmetic limit. An earlier version raised it to
+  // 2000 to stop `density` reading as inert on a very tall section, which made
+  // that section 7.7x more expensive to draw. The cap has to stay somewhere a
+  // mid-range phone can afford 60 times a second.
+  test('keeps the per-frame star budget affordable on any viewport', () => {
+    expect(STAR_COUNT_LIMITS.max).toBeLessThanOrEqual(400);
+    expect(starCount(3840, 2160, 2)).toBeLessThanOrEqual(400);
+  });
 });
 
 describe('createStars', () => {

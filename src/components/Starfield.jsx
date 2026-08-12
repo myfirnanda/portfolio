@@ -23,8 +23,11 @@ const MAX_STEP_MS = 50;
 // on most phones and Firefox on any display. A star field is soft dots, so
 // falling back to a lower effective resolution on very tall sections is an
 // acceptable trade for "still renders."
-const MAX_CANVAS_DIMENSION = 4096;
-const MAX_CANVAS_AREA = MAX_CANVAS_DIMENSION * MAX_CANVAS_DIMENSION;
+// The two limits are set independently on purpose. Deriving the area cap from
+// the dimension cap (AREA = DIMENSION^2) makes the area term dead code, since
+// sqrt(w*h) <= max(w,h) always: the dimension term would win every time.
+const MAX_CANVAS_DIMENSION = 8192;
+const MAX_CANVAS_AREA = 16 * 1024 * 1024; // iOS Safari's ~16.7 Mpx ceiling
 
 const Starfield = ({
   density = 1,

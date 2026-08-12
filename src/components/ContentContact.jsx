@@ -1,14 +1,20 @@
+import Starfield from "./Starfield";
+
 const ContentContact = () => {
     return (
         <div id="contact" className="pt-16 mb-20 sm:mb-28 lg:mb-36 px-4 sm:px-6 relative overflow-hidden">
-            <div className="mb-8 sm:mb-10">
+            {/* This region sits above SectionMenu's opaque background image, so
+                unlike SectionMenu itself it can actually show a starfield. */}
+            <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
+
+            <div className="mb-8 sm:mb-10 relative z-10">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold relative line-heading inline-block mb-3 sm:mb-4">Contact Me</h3>
                 <span className="text-2xl sm:text-3xl ml-1 sm:ml-2">📞</span>
             </div>
-            <p className="mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed max-w-3xl">
+            <p className="mb-8 sm:mb-10 md:mb-12 text-sm sm:text-base md:text-lg text-gray-300 leading-relaxed max-w-3xl relative z-10">
                 Looking to collaborate, discuss a potential project, or explore professional opportunities? I’m open to new challenges and would love to connect. Reach out to me via WhatsApp or email, and let’s talk about how we can work together to achieve your goals.
             </p>
-            <ul className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-6 sm:gap-10 md:gap-16 lg:gap-28">
+            <ul className="flex flex-col sm:flex-row justify-center items-start sm:items-center gap-6 sm:gap-10 md:gap-16 lg:gap-28 relative z-10">
                 <li className="inline-block">
                     <a href="https://wa.me/6285161858890" className="flex gap-3 sm:gap-4 items-center hover:scale-[1.02] transition-transform duration-200" target="_blank" rel="noopener noreferrer">
                         <button type="button" className="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l hover:shadow-lg hover:shadow-purple-500/50 focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-full transition-all duration-300 flex-shrink-0">
