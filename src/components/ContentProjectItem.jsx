@@ -62,7 +62,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                 {/* Content */}
                 <div className="p-5 sm:p-6 flex flex-col flex-grow">
                     {/* Title */}
-                    <h5 className="text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2 min-h-[3rem] group-hover:${colorScheme.text} transition-colors duration-300">
+                    <h5 className={`text-lg sm:text-xl font-bold text-white mb-2 line-clamp-2 min-h-[3rem] group-hover:${colorScheme.text} transition-colors duration-300`}>
                         {title}
                     </h5>
                     
@@ -188,7 +188,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                             {/* Description */}
                             <div>
                                 <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-                                    <i className="ri-file-text-line ${colorScheme.text}"></i>
+                                    <i className={`ri-file-text-line ${colorScheme.text}`}></i>
                                     Overview
                                 </h3>
                                 <p className="text-gray-300 leading-relaxed">
@@ -200,13 +200,13 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                             {features.length > 0 && (
                                 <div>
                                     <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                                        <i className="ri-checkbox-circle-line ${colorScheme.text}"></i>
+                                        <i className={`ri-checkbox-circle-line ${colorScheme.text}`}></i>
                                         Key Features
                                     </h3>
                                     <ul className="space-y-2">
                                         {features.map((feature, idx) => (
                                             <li key={idx} className="flex items-start gap-2 text-gray-300">
-                                                <i className="ri-arrow-right-s-line ${colorScheme.text} text-xl flex-shrink-0 mt-0.5"></i>
+                                                <i className={`ri-arrow-right-s-line ${colorScheme.text} text-xl flex-shrink-0 mt-0.5`}></i>
                                                 <span>{feature}</span>
                                             </li>
                                         ))}
@@ -217,7 +217,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                             {/* Tech Stack */}
                             <div>
                                 <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                                    <i className="ri-code-s-slash-line ${colorScheme.text}"></i>
+                                    <i className={`ri-code-s-slash-line ${colorScheme.text}`}></i>
                                     Tech Stack
                                 </h3>
                                 <div className="flex flex-wrap gap-2">

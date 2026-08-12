@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import ContentProjectList from "./ContentProjectList";
 
 const ContentProject = ({ projects }) => {
     // Show only latest 3 projects on home page

@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 
+const words = [
+    "Software Engineer",
+    "Backend Developer",
+    "Fullstack Developer",
+    "Web Developer",
+];
+
 const SectionProfile = () => {
-    const words = [
-        "Software Engineer",
-        "Backend Developer",
-        "Fullstack Developer",
-        "Web Developer",
-    ];
-    
     const [text, setText] = useState("");
     const [wordIndex, setWordIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
