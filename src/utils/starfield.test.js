@@ -107,6 +107,14 @@ describe('createMeteor', () => {
     expect(m.vx).toBeLessThan(0);
     expect(m.vy).toBeGreaterThan(0);
   });
+
+  // "Falling star" means predominantly downward with a leftward lean. An
+  // earlier angle of 150 degrees sat only 30 degrees below horizontal, so it
+  // read as a sideways streak rather than something falling.
+  test('down-left falls more steeply than it drifts sideways', () => {
+    const m = createMeteor(800, 600, 'down-left', () => 0.5);
+    expect(Math.abs(m.vy)).toBeGreaterThan(Math.abs(m.vx));
+  });
 });
 
 // This is the regression test for the original bug: the CSS version set the

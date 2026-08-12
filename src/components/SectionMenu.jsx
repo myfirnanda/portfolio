@@ -4,12 +4,12 @@ import SectionMenuContent from "./SectionMenuContent"
 const SectionMenu = () => {
     return (
         <>
-        {/* No Starfield here: the background-image div below is opaque and paints
-            over this section, so a canvas at this level is never visible. The
-            stars for this region live in ContentContact, which sits above it. */}
+        {/* The starfield for this region comes from App's fixed canvas, which
+            paints at z-1, above the opaque background image below. Content here
+            must therefore sit at z-10 to stay above the stars. */}
         <section id="menu" className="bg-black relative">
             <div className="relative" style={{ backgroundImage: `url("https://www.dropbox.com/scl/fi/yjlqvwv7f9kbqbe0rzyr1/merged-img.webp?rlkey=8h0m4n1bz1keqp2e8zm8u0wvs&st=dj0hw4yk&raw=1")`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: 'rgba(0, 0, 0, 0.5)', backgroundBlendMode: 'multiply' }}>
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 py-10">
                         <SectionMenuAside />
                         <SectionMenuContent />

@@ -2,9 +2,12 @@
 // React imports: those cannot be unit tested in this project (see the plan's
 // Global Constraints), so anything worth testing lives here.
 
+// Canvas degrees: 0 points right, positive turns clockwise (y grows downward).
+// 'down-left' is 25 degrees off straight-down, so meteors read as falling with
+// a leftward lean rather than streaking sideways.
 export const DIRECTION_ANGLES = {
   'up-right': -55,
-  'down-left': 150,
+  'down-left': 115,
 };
 
 export const ANGLE_JITTER_DEG = 12;
@@ -32,9 +35,14 @@ export function pickAngle(direction, rng = Math.random) {
   return toRadians(base + jitter);
 }
 
-export const METEOR_LIFETIME_MS = { min: 500, max: 900 };
+// Doubled from 500-900ms. Travel distance is unchanged, so this halves the
+// apparent speed: long enough to watch, still fast enough to read as a meteor
+// rather than a drifting dot.
+export const METEOR_LIFETIME_MS = { min: 1000, max: 1800 };
 export const METEOR_TRAVEL_FRACTION = { min: 0.4, max: 0.7 };
-export const TRAIL_MS = { min: 90, max: 160 };
+// Trail length is speed x this duration. Raised alongside the slower meteors so
+// the streak keeps its length instead of shrinking with the reduced speed.
+export const TRAIL_MS = { min: 150, max: 260 };
 export const PEAK_OPACITY = { min: 0.45, max: 0.75 };
 
 // Velocity is stored in px per millisecond and trail length in milliseconds,

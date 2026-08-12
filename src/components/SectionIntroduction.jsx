@@ -1,7 +1,8 @@
 const SectionIntroduction = () => {
     return (
         <section id="introduction" className="py-16 sm:py-20 md:py-28 px-4">
-            <div className="max-w-6xl mx-auto">
+            {/* z-10 keeps this above App's fixed starfield canvas at z-1. */}
+            <div className="max-w-6xl mx-auto relative z-10">
                 {/* Header */}
                 <div className="text-center mb-12 sm:mb-16">
                     <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold relative line-heading-center inline-block mb-4 animate-fade-in">

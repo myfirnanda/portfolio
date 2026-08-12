@@ -34,6 +34,11 @@ const Starfield = ({
   meteorRate = 1,
   direction = 'down-left',
   maxMeteors = 4,
+  // `fixed` pins the canvas to the viewport instead of to a parent, so one
+  // instance covers the whole scroll. It also keeps the canvas viewport-sized,
+  // which is what keeps the star density correct and the per-frame cost flat
+  // no matter how long the page is. Requires no positioned parent.
+  fixed = false,
   className = '',
 }) => {
   const canvasRef = useRef(null);
@@ -191,7 +196,9 @@ const Starfield = ({
     <canvas
       ref={canvasRef}
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-0 z-0 h-full w-full ${className}`}
+      className={`pointer-events-none inset-0 h-full w-full ${
+        fixed ? 'fixed z-[1]' : 'absolute z-0'
+      } ${className}`}
     />
   );
 };

@@ -2,14 +2,12 @@ import { Link } from 'react-router-dom';
 import ContentProjectList from "../components/ContentProjectList";
 import BackToTop from "../components/BackToTop";
 import { personalData } from "../utils/personalData";
-import Starfield from "../components/Starfield";
 
 const ProjectsPage = () => {
     return (
         <main className="min-h-screen bg-black">
             {/* Header Section */}
             <section className="pt-24 pb-10 relative">
-                <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
 
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     {/* Back Button */}
@@ -52,7 +50,6 @@ const ProjectsPage = () => {
             
             {/* Projects Grid */}
             <section className="pb-20 relative">
-                <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
 
                 <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <ContentProjectList projects={personalData.projects} />
