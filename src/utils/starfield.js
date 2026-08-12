@@ -76,6 +76,20 @@ export function isMeteorDead(meteor) {
   return meteor.age >= meteor.lifetime;
 }
 
+// The tail point a meteor's streak is drawn from, in the same coordinate
+// space as meteor.x/y. This is deliberately the only place that formula
+// lives: the renderer must call this rather than re-deriving (or, worse,
+// storing) a tail angle of its own, because a separately maintained angle is
+// exactly how the original CSS version drifted 10-15 degrees off the travel
+// path. Tail orientation is a consequence of velocity, not an independent
+// value — this function is what makes that testable.
+export function meteorTail(meteor) {
+  return {
+    x: meteor.x - meteor.vx * meteor.trail,
+    y: meteor.y - meteor.vy * meteor.trail,
+  };
+}
+
 export const FADE_IN_RATIO = 0.15;
 export const FADE_OUT_RATIO = 0.45;
 
@@ -90,7 +104,16 @@ export function meteorEnvelope(lifeRatio) {
 }
 
 export const STAR_AREA_PER_STAR = 12000;
-export const STAR_COUNT_LIMITS = { min: 30, max: 260 };
+// max was 260, tuned for a single-viewport section (~3.1 Mpx). SectionMenu
+// (experience/skills/education/projects/certificates/contact stacked in one
+// column) can run 6,000-15,000 CSS px tall, i.e. 11-29 Mpx at a typical
+// desktop width, which sat well above the old cap regardless of the density
+// prop passed in — density became a no-op there. Raised so the designed
+// ~1-star-per-12,000px² density stays live across that realistic range
+// (it still saturates on extreme ultra-wide/very-tall combinations, which is
+// an acceptable, deliberate ceiling rather than an accidental one); 2,000
+// simple arc+fill draws per frame is still cheap for canvas 2D.
+export const STAR_COUNT_LIMITS = { min: 30, max: 2000 };
 export const STAR_RADIUS = { min: 0.4, max: 1.4 };
 export const STAR_BASE_OPACITY = { min: 0.2, max: 0.7 };
 export const TWINKLE_SPEED = { min: 0.4, max: 1.2 }; // radians per second

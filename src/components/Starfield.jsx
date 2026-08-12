@@ -5,6 +5,7 @@ import {
   advanceMeteor,
   isMeteorDead,
   meteorEnvelope,
+  meteorTail,
   twinkleOpacity,
   lerp,
 } from '../utils/starfield';
@@ -14,6 +15,16 @@ const METEOR_RGB = '234, 242, 255';
 // Cap the step so returning to a backgrounded tab does not teleport every
 // meteor across the screen in a single frame.
 const MAX_STEP_MS = 50;
+// Hard ceiling on the canvas backing store, independent of section height.
+// Firefox refuses any single dimension above 32,767px (renders nothing at
+// all past it); iOS Safari blanks the canvas once width*height exceeds
+// ~16.7 Mpx. SectionMenu alone can be 6,000-15,000 CSS px tall, so at
+// devicePixelRatio 2-3 the naive width*dpr/height*dpr would blow both limits
+// on most phones and Firefox on any display. A star field is soft dots, so
+// falling back to a lower effective resolution on very tall sections is an
+// acceptable trade for "still renders."
+const MAX_CANVAS_DIMENSION = 4096;
+const MAX_CANVAS_AREA = MAX_CANVAS_DIMENSION * MAX_CANVAS_DIMENSION;
 
 const Starfield = ({
   density = 1,
@@ -64,15 +75,14 @@ const Starfield = ({
       meteors.forEach((m) => {
         const alpha = m.peak * meteorEnvelope(m.age / m.lifetime);
         if (alpha <= 0) return;
-        const tailX = m.x - m.vx * m.trail;
-        const tailY = m.y - m.vy * m.trail;
-        const gradient = ctx.createLinearGradient(tailX, tailY, m.x, m.y);
+        const tail = meteorTail(m);
+        const gradient = ctx.createLinearGradient(tail.x, tail.y, m.x, m.y);
         gradient.addColorStop(0, `rgba(${METEOR_RGB}, 0)`);
         gradient.addColorStop(1, `rgba(${METEOR_RGB}, 1)`);
         ctx.globalAlpha = alpha;
         ctx.strokeStyle = gradient;
         ctx.beginPath();
-        ctx.moveTo(tailX, tailY);
+        ctx.moveTo(tail.x, tail.y);
         ctx.lineTo(m.x, m.y);
         ctx.stroke();
       });
@@ -128,7 +138,18 @@ const Starfield = ({
       height = rect.height;
       if (width === 0 || height === 0) return; // not laid out yet
 
-      const dpr = window.devicePixelRatio || 1;
+      // Clamp the *effective* DPR (never the raw one) so the backing store
+      // never approaches the browser limits above, no matter how tall the
+      // section is. ctx.setTransform still uses this same clamped value, so
+      // the drawing coordinate system stays in CSS pixels — draw calls keep
+      // using `width`/`height`, unaware anything was capped.
+      const rawDpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(
+        rawDpr,
+        MAX_CANVAS_DIMENSION / width,
+        MAX_CANVAS_DIMENSION / height,
+        Math.sqrt(MAX_CANVAS_AREA / (width * height))
+      );
       canvas.width = Math.round(width * dpr);
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

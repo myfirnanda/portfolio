@@ -8,6 +8,7 @@ import {
   createMeteor,
   advanceMeteor,
   isMeteorDead,
+  meteorTail,
   METEOR_LIFETIME_MS,
   meteorEnvelope,
   starCount,
@@ -85,20 +86,6 @@ describe('createMeteor', () => {
     expect(m.lifetime).toBeLessThanOrEqual(METEOR_LIFETIME_MS.max);
   });
 
-  // This is the regression test for the original bug: the CSS version set
-  // the tail angle with rotate() and the path with translate(), and the two
-  // disagreed by 10-15 degrees. Here the tail is drawn from
-  // (x - vx*trail, y - vy*trail) to (x, y), so it is a function of velocity
-  // and the two cannot diverge.
-  test('tail direction is identical to travel direction', () => {
-    ['up-right', 'down-left'].forEach((direction) => {
-      const m = createMeteor(800, 600, direction, () => 0.5);
-      const tailAngle = Math.atan2(m.vy * m.trail, m.vx * m.trail);
-      const travelAngle = Math.atan2(m.vy, m.vx);
-      expect(tailAngle).toBeCloseTo(travelAngle, 10);
-    });
-  });
-
   test('travels between 40% and 70% of the diagonal within its lifetime', () => {
     const width = 800;
     const height = 600;
@@ -119,6 +106,35 @@ describe('createMeteor', () => {
     const m = createMeteor(800, 600, 'down-left', () => 0.5);
     expect(m.vx).toBeLessThan(0);
     expect(m.vy).toBeGreaterThan(0);
+  });
+});
+
+// This is the regression test for the original bug: the CSS version set the
+// tail angle with rotate() and the path with translate(), and the two
+// disagreed by 10-15 degrees. meteorTail is the one place the tail point is
+// computed, from velocity and trail duration, so these tests exercise the
+// actual returned segment rather than re-deriving the same formula the way
+// the test being replaced did (atan2(k*y, k*x) == atan2(y, x), true for any
+// positive k — it could not have caught a bug in the formula itself).
+describe('meteorTail', () => {
+  test("the tail-to-meteor segment's angle equals the travel angle", () => {
+    ['up-right', 'down-left'].forEach((direction) => {
+      const m = createMeteor(800, 600, direction, () => 0.5);
+      const tail = meteorTail(m);
+      // Computed from the returned point, not from vx/vy directly, so a
+      // reintroduced separately-stored tail angle (or a broken sign/scale in
+      // the formula) shows up as a real mismatch here.
+      const segmentAngle = Math.atan2(m.y - tail.y, m.x - tail.x);
+      const travelAngle = Math.atan2(m.vy, m.vx);
+      expect(segmentAngle).toBeCloseTo(travelAngle, 10);
+    });
+  });
+
+  test('is the point trail milliseconds behind the meteor along its velocity', () => {
+    const m = { x: 100, y: 50, vx: 3, vy: -4, trail: 20 };
+    const tail = meteorTail(m);
+    expect(tail.x).toBeCloseTo(100 - 3 * 20);
+    expect(tail.y).toBeCloseTo(50 - -4 * 20);
   });
 });
 
