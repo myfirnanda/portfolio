@@ -1,10 +1,6 @@
-import Starfield from "./Starfield";
-
 const ContentContact = () => {
     return (
         <div id="contact" className="pt-16 mb-20 sm:mb-28 lg:mb-36 px-4 sm:px-6 relative overflow-hidden">
-            <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
-
             <div className="mb-8 sm:mb-10">
                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold relative line-heading inline-block mb-3 sm:mb-4">Contact Me</h3>
                 <span className="text-2xl sm:text-3xl ml-1 sm:ml-2">📞</span>
