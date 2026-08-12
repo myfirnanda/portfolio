@@ -9,6 +9,11 @@ import {
   advanceMeteor,
   isMeteorDead,
   METEOR_LIFETIME_MS,
+  meteorEnvelope,
+  starCount,
+  createStars,
+  twinkleOpacity,
+  STAR_COUNT_LIMITS,
 } from './starfield';
 
 describe('toRadians', () => {
@@ -141,5 +146,88 @@ describe('isMeteorDead', () => {
   test('is false before the lifetime elapses and true after', () => {
     expect(isMeteorDead({ age: 499, lifetime: 500 })).toBe(false);
     expect(isMeteorDead({ age: 500, lifetime: 500 })).toBe(true);
+  });
+});
+
+describe('meteorEnvelope', () => {
+  test('is dark at both ends of life', () => {
+    expect(meteorEnvelope(0)).toBe(0);
+    expect(meteorEnvelope(1)).toBe(0);
+  });
+
+  test('reaches full brightness once the fade-in completes', () => {
+    expect(meteorEnvelope(0.15)).toBeCloseTo(1);
+    expect(meteorEnvelope(0.4)).toBeCloseTo(1);
+  });
+
+  test('ramps up rather than popping in', () => {
+    // The CSS version jumped straight to opacity 1 at 0%.
+    expect(meteorEnvelope(0.075)).toBeCloseTo(0.5);
+  });
+
+  test('fades out over the final 45% of life', () => {
+    expect(meteorEnvelope(0.775)).toBeCloseTo(0.5);
+  });
+
+  test('never leaves the 0..1 range across the whole life', () => {
+    for (let r = 0; r <= 1; r += 0.01) {
+      const v = meteorEnvelope(r);
+      expect(v).toBeGreaterThanOrEqual(0);
+      expect(v).toBeLessThanOrEqual(1);
+    }
+  });
+});
+
+describe('starCount', () => {
+  test('scales with area', () => {
+    expect(starCount(1920, 1080)).toBeGreaterThan(starCount(800, 600));
+  });
+
+  test('clamps tiny and huge areas to the limits', () => {
+    expect(starCount(10, 10)).toBe(STAR_COUNT_LIMITS.min);
+    expect(starCount(10000, 10000)).toBe(STAR_COUNT_LIMITS.max);
+  });
+
+  test('responds to the density multiplier', () => {
+    expect(starCount(1000, 1000, 2)).toBeGreaterThan(starCount(1000, 1000, 1));
+  });
+});
+
+describe('createStars', () => {
+  test('creates the requested count within bounds', () => {
+    const stars = createStars(800, 600, 1, () => 0.5);
+    expect(stars).toHaveLength(starCount(800, 600, 1));
+    stars.forEach((s) => {
+      expect(s.x).toBeGreaterThanOrEqual(0);
+      expect(s.x).toBeLessThanOrEqual(800);
+      expect(s.y).toBeGreaterThanOrEqual(0);
+      expect(s.y).toBeLessThanOrEqual(600);
+      expect(s.radius).toBeGreaterThan(0);
+    });
+  });
+
+  test('gives stars independent phases so they do not pulse in unison', () => {
+    let n = 0;
+    // A varying rng stands in for Math.random here.
+    const rng = () => ((n += 0.137) % 1);
+    const stars = createStars(800, 600, 1, rng);
+    const phases = new Set(stars.map((s) => s.phase));
+    expect(phases.size).toBeGreaterThan(1);
+  });
+});
+
+describe('twinkleOpacity', () => {
+  test('stays within the star base opacity and never goes negative', () => {
+    const star = { baseOpacity: 0.6, twinkleSpeed: 1, phase: 0 };
+    for (let t = 0; t < 20; t += 0.1) {
+      const v = twinkleOpacity(star, t);
+      expect(v).toBeGreaterThanOrEqual(0);
+      expect(v).toBeLessThanOrEqual(star.baseOpacity);
+    }
+  });
+
+  test('actually varies over time', () => {
+    const star = { baseOpacity: 0.6, twinkleSpeed: 1, phase: 0 };
+    expect(twinkleOpacity(star, 0)).not.toBeCloseTo(twinkleOpacity(star, 1.5));
   });
 });

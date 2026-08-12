@@ -75,3 +75,54 @@ export function advanceMeteor(meteor, dtMs) {
 export function isMeteorDead(meteor) {
   return meteor.age >= meteor.lifetime;
 }
+
+export const FADE_IN_RATIO = 0.15;
+export const FADE_OUT_RATIO = 0.45;
+
+// Brightness multiplier across a meteor's life: ramp up, hold, fall away.
+// The asymmetry matters — a real meteor brightens quickly and dims slowly.
+export function meteorEnvelope(lifeRatio) {
+  if (lifeRatio <= 0 || lifeRatio >= 1) return 0;
+  if (lifeRatio < FADE_IN_RATIO) return lifeRatio / FADE_IN_RATIO;
+  const fadeOutStart = 1 - FADE_OUT_RATIO;
+  if (lifeRatio > fadeOutStart) return (1 - lifeRatio) / FADE_OUT_RATIO;
+  return 1;
+}
+
+export const STAR_AREA_PER_STAR = 12000;
+export const STAR_COUNT_LIMITS = { min: 30, max: 260 };
+export const STAR_RADIUS = { min: 0.4, max: 1.4 };
+export const STAR_BASE_OPACITY = { min: 0.2, max: 0.7 };
+export const TWINKLE_SPEED = { min: 0.4, max: 1.2 }; // radians per second
+
+export function starCount(width, height, density = 1) {
+  const raw = Math.round(
+    ((width * height) / STAR_AREA_PER_STAR) * density
+  );
+  return clamp(raw, STAR_COUNT_LIMITS.min, STAR_COUNT_LIMITS.max);
+}
+
+export function createStars(width, height, density = 1, rng = Math.random) {
+  const count = starCount(width, height, density);
+  const stars = [];
+  for (let i = 0; i < count; i += 1) {
+    stars.push({
+      x: rng() * width,
+      y: rng() * height,
+      radius: lerp(STAR_RADIUS.min, STAR_RADIUS.max, rng()),
+      baseOpacity: lerp(STAR_BASE_OPACITY.min, STAR_BASE_OPACITY.max, rng()),
+      twinkleSpeed: lerp(TWINKLE_SPEED.min, TWINKLE_SPEED.max, rng()),
+      // An independent phase per star is what keeps the field from
+      // pulsing as one block, which is the tell of a fake sky.
+      phase: rng() * Math.PI * 2,
+    });
+  }
+  return stars;
+}
+
+// t is elapsed seconds. Output is bounded by the star's own base opacity,
+// so the "many but subtle" look survives any density setting.
+export function twinkleOpacity(star, t) {
+  const wave = 0.55 + 0.45 * Math.sin(t * star.twinkleSpeed + star.phase);
+  return star.baseOpacity * wave;
+}
