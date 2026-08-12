@@ -11,7 +11,7 @@ const ProjectsPage = () => {
             <section className="pt-24 pb-10 relative">
                 <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
 
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     {/* Back Button */}
                     <Link 
                         to="/" 
@@ -54,7 +54,7 @@ const ProjectsPage = () => {
             <section className="pb-20 relative">
                 <Starfield direction="down-left" density={0.8} meteorRate={0.8} maxMeteors={3} />
 
-                <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                     <ContentProjectList projects={personalData.projects} />
                 </div>
             </section>
