@@ -1,54 +1,59 @@
+/* ===== Theme tokens =====
+   Stored as raw "R G B" channels, not hex, so Tailwind can compose them with
+   opacity modifiers: the config declares rgb(var(--bg) / <alpha-value>), which
+   is what keeps the ~114 existing utilities like bg-surface/50 working. A
+   hex value in a CSS variable would silently drop the /50 instead.
+   Light is the default; .dark on <html> swaps the values. Components never
+   name a literal colour, so a future re-theme happens only in this block. */
+:root {
+    --bg: 228 238 232;
+    --surface: 250 252 251;
+    --raised: 242 247 244;
+    --line: 196 216 203;
+    --fg: 11 23 18;
+    --fg-muted: 69 86 77;
+    --fg-subtle: 87 105 96;
+    --accent: 4 108 78;
+    --accent-strong: 4 108 78;
+    --accent-alt: 15 118 110;
+    --on-accent: 255 255 255;
+    color-scheme: light;
+}
+
+.dark {
+    --bg: 5 11 8;
+    --surface: 26 44 35;
+    --raised: 34 56 48;
+    --line: 47 74 62;
+    --fg: 234 242 237;
+    --fg-muted: 167 189 177;
+    --fg-subtle: 138 163 150;
+    --accent: 45 224 154;
+    --accent-strong: 16 185 129;
+    --accent-alt: 94 234 212;
+    --on-accent: 3 20 14;
+    color-scheme: dark;
+}
+
 html, body {
     scroll-behavior: smooth;
     position: relative;
 }
 
 body {
-    background-color: #000;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--fg));
 }
 
-/* Global Starfield Background */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    background-image:
-        radial-gradient(1px 1px at 10% 15%, white, transparent),
-        radial-gradient(1px 1px at 25% 35%, white, transparent),
-        radial-gradient(1px 1px at 40% 60%, white, transparent),
-        radial-gradient(1px 1px at 55% 25%, white, transparent),
-        radial-gradient(1px 1px at 70% 80%, white, transparent),
-        radial-gradient(1px 1px at 85% 45%, white, transparent),
-        radial-gradient(1px 1px at 15% 70%, white, transparent),
-        radial-gradient(1px 1px at 45% 90%, white, transparent),
-        radial-gradient(1px 1px at 75% 10%, white, transparent),
-        radial-gradient(1px 1px at 90% 65%, white, transparent),
-        radial-gradient(1px 1px at 30% 50%, white, transparent),
-        radial-gradient(1px 1px at 60% 40%, white, transparent),
-        radial-gradient(1px 1px at 20% 85%, white, transparent),
-        radial-gradient(1px 1px at 80% 30%, white, transparent),
-        radial-gradient(1px 1px at 50% 75%, white, transparent),
-        radial-gradient(1.5px 1.5px at 35% 20%, rgba(147, 51, 234, 0.6), transparent),
-        radial-gradient(1.5px 1.5px at 65% 55%, rgba(236, 72, 153, 0.6), transparent),
-        radial-gradient(1.5px 1.5px at 22% 45%, rgba(217, 70, 239, 0.6), transparent),
-        radial-gradient(1.5px 1.5px at 78% 70%, rgba(168, 85, 247, 0.6), transparent),
-        radial-gradient(1.5px 1.5px at 48% 12%, rgba(244, 114, 182, 0.6), transparent);
-    background-size: 100% 100%;
-    animation: twinkle-global 5s ease-in-out infinite;
-    opacity: 0.6;
+/* Theme switches are a deliberate user action, so a short cross-fade reads as
+   responsive. Excluded from transform/opacity so hover effects stay snappy. */
+body, header, section, div, a, button, i, p, span, h1, h2, h3, h4, li, ul {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
 
-@keyframes twinkle-global {
-    0%, 100% {
-        opacity: 0.4;
-    }
-    50% {
-        opacity: 0.7;
+@media (prefers-reduced-motion: reduce) {
+    body, header, section, div, a, button, i, p, span, h1, h2, h3, h4, li, ul {
+        transition: none;
     }
 }
 
@@ -63,19 +68,15 @@ h1, h2, h3, h4, h5, h6, p, a, li, span, label, ul, li {
     font-family: 'Oxanium', sans-serif;
 }
 
-section#profile {
-    background-size: cover; background-position: center; background-color: rgba(0, 0, 0, 0.5); background-blend-mode: multiply;
-}
-
 .typing-text {
     white-space: nowrap;
     overflow: hidden;
-    color: #fff;
+    color: rgb(var(--fg));
     margin-right: 5px;
 }
 
 .caret {
-    border-right: .15em solid rgb(192 38 211);
+    border-right: .15em solid rgb(var(--accent));
     animation: blink 1s infinite;
 }
 
@@ -86,7 +87,7 @@ h3.line-heading::after {
     left: 0;
     width: 75%;
     height: 3px;
-    background-color: rgb(192 38 211);
+    background-color: rgb(var(--accent));
 }
 
 h3.line-heading-center::after {
@@ -96,7 +97,7 @@ h3.line-heading-center::after {
     left: 50%;
     width: 75%;
     height: 3px;
-    background-color: rgb(192 38 211);
+    background-color: rgb(var(--accent));
     transform: translateX(-50%);
 }
 
@@ -147,28 +148,12 @@ h3.line-heading-center::after {
   animation: fadeIn 0.2s ease-out;
 }
 
-/* ===== Starfield Decorations ===== */
-
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.2);
-  }
+/* taste-skill 6.B: every animation collapses to static under reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
-
-@keyframes twinkle-slow {
-  0%, 100% {
-    opacity: 0.4;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.9;
-    transform: scale(1.3);
-  }
-}
-
-

@@ -27,3 +27,5 @@ yarn-error.log*
 # claude code worktrees and scratch state
 .claude/worktrees
 .superpowers
+
+.vercel

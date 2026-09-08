@@ -9,55 +9,55 @@ const ContentEducation = () => {
             {/* Timeline Container */}
             <div className="relative space-y-8 sm:space-y-10">
                 {/* Timeline Line - Hidden on mobile */}
-                <div className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-fuchsia-500 via-purple-500 to-pink-500"></div>
+                <div className="hidden md:block absolute left-8 top-4 bottom-4 w-0.5 bg-accent-strong"></div>
                 
                 {/* Education Item 1 */}
                 <div className="relative group">
                     {/* Timeline Dot */}
-                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-fuchsia-500 rounded-full border-4 border-black z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-accent-strong rounded-full border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300"></div>
                     
                     {/* Card */}
-                    <div className="md:ml-16 bg-gradient-to-br from-zinc-900 to-zinc-800/50 rounded-xl p-5 sm:p-6 md:p-8 border border-zinc-700 hover:border-fuchsia-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-fuchsia-500/30">
+                    <div className="md:ml-16 bg-surface rounded-xl p-5 sm:p-6 md:p-8 border border-line hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20">
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-4">
                             <div className="flex-1">
-                                <h4 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200 mb-1">
+                                <h4 className="text-xl sm:text-2xl font-bold text-fg mb-1">
                                     National Development University
                                 </h4>
-                                <h4 className="text-base sm:text-xl text-purple-300">Veteran of East Java</h4>
+                                <h4 className="text-base sm:text-xl text-accent">Veteran of East Java</h4>
                             </div>
-                            <div className="flex items-center gap-2 text-sm sm:text-base text-gray-400">
-                                <i className="ri-map-pin-line text-fuchsia-400"></i>
+                            <div className="flex items-center gap-2 text-sm sm:text-base text-fg-muted">
+                                <i className="ri-map-pin-line text-accent"></i>
                                 <span>Surabaya, Indonesia</span>
                             </div>
                         </div>
                         
                         {/* Degree & Date */}
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-5 pb-4 border-b border-zinc-700/50">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-5 pb-4 border-b border-line/50">
                             <div className="flex items-center gap-2">
-                                <i className="ri-graduation-cap-fill text-xl text-fuchsia-500"></i>
-                                <h4 className="text-base sm:text-lg font-semibold text-purple-200">Bachelor of Computer Science</h4>
+                                <i className="ri-graduation-cap-fill text-xl text-accent"></i>
+                                <h4 className="text-base sm:text-lg font-semibold text-accent">Bachelor of Computer Science</h4>
                             </div>
-                            <div className="flex items-center gap-2 text-sm sm:text-base text-gray-400">
-                                <i className="ri-calendar-line text-purple-400"></i>
+                            <div className="flex items-center gap-2 text-sm sm:text-base text-fg-muted">
+                                <i className="ri-calendar-line text-accent"></i>
                                 <span>2021 - 2025</span>
                             </div>
                         </div>
                         
                         {/* Details */}
                         <div className="space-y-3">
-                            <div className="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg">
+                            <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-xl">
                                 <i className="ri-star-fill text-xl text-yellow-500 mt-0.5 flex-shrink-0"></i>
                                 <div>
-                                    <span className="font-semibold text-white">Cumulative GPA:</span>
+                                    <span className="font-semibold text-fg">Cumulative GPA:</span>
                                     <span className="ml-2 text-yellow-400 font-bold">3.88 / 4.00</span>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-3 p-3 bg-zinc-800/50 rounded-lg">
-                                <i className="ri-book-open-line text-xl text-purple-400 mt-0.5 flex-shrink-0"></i>
+                            <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-xl">
+                                <i className="ri-book-open-line text-xl text-accent mt-0.5 flex-shrink-0"></i>
                                 <div>
-                                    <span className="font-semibold text-white block mb-1">Relevant Coursework:</span>
-                                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                                    <span className="font-semibold text-fg block mb-1">Relevant Coursework:</span>
+                                    <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
                                         Software Engineering, Web Programming, Mobile App Development, Cloud Computing, Data Structure, Object-Oriented Programming (OOP), Framework Programming
                                     </p>
                                 </div>
@@ -69,31 +69,31 @@ const ContentEducation = () => {
                 {/* Education Item 2 */}
                 <div className="relative group">
                     {/* Timeline Dot */}
-                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-purple-500 rounded-full border-4 border-black z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-accent-strong rounded-full border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300"></div>
                     
                     {/* Card */}
-                    <div className="md:ml-16 bg-gradient-to-br from-zinc-900 to-zinc-800/50 rounded-xl p-5 sm:p-6 md:p-8 border border-zinc-700 hover:border-purple-500/50 transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/30">
+                    <div className="md:ml-16 bg-surface rounded-xl p-5 sm:p-6 md:p-8 border border-line hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20">
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-4">
                             <div className="flex-1">
-                                <h4 className="text-xl sm:text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-pink-200 mb-1">
+                                <h4 className="text-xl sm:text-2xl font-bold text-fg mb-1">
                                     Yayasan Dicoding Indonesia
                                 </h4>
                             </div>
-                            <div className="flex items-center gap-2 text-sm sm:text-base text-gray-400">
-                                <i className="ri-map-pin-line text-purple-400"></i>
+                            <div className="flex items-center gap-2 text-sm sm:text-base text-fg-muted">
+                                <i className="ri-map-pin-line text-accent"></i>
                                 <span>Bandung, Indonesia</span>
                             </div>
                         </div>
                         
                         {/* Program & Date */}
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-5 pb-4 border-b border-zinc-700/50">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-5 pb-4 border-b border-line/50">
                             <div className="flex items-center gap-2">
-                                <i className="ri-cloud-fill text-xl text-purple-500"></i>
-                                <h4 className="text-base sm:text-lg font-semibold text-pink-200">Cloud Computing Learning Path</h4>
+                                <i className="ri-cloud-fill text-xl text-accent"></i>
+                                <h4 className="text-base sm:text-lg font-semibold text-accent">Cloud Computing Learning Path</h4>
                             </div>
-                            <div className="flex items-center gap-2 text-sm sm:text-base text-gray-400">
-                                <i className="ri-calendar-line text-pink-400"></i>
+                            <div className="flex items-center gap-2 text-sm sm:text-base text-fg-muted">
+                                <i className="ri-calendar-line text-accent"></i>
                                 <span>Aug 2023 - Dec 2023</span>
                             </div>
                         </div>
@@ -101,21 +101,21 @@ const ContentEducation = () => {
                         {/* Achievements */}
                         <div className="space-y-3">
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-fuchsia-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                                    Developed an innovative app with <span className="text-purple-300 font-semibold">CRUD functionalities</span>, authentication, and authorization, integrating with <span className="text-fuchsia-400 font-semibold">GoogleCloud Platform (GCP)</span> services for enhanced performance and scalability.
+                                <div className="w-2 h-2 bg-accent-strong rounded-full mt-2 flex-shrink-0"></div>
+                                <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
+                                    Developed an innovative app with <span className="text-accent font-semibold">CRUD functionalities</span>, authentication, and authorization, integrating with <span className="text-accent font-semibold">GoogleCloud Platform (GCP)</span> services for enhanced performance and scalability.
                                 </p>
                             </div>
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-purple-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                                    Created a <span className="text-purple-300 font-semibold">REST API</span> using ExpressJS and MySQL, ensuring smooth frontend usage by testing with Postman, and provided clear API documentation with <span className="text-pink-400 font-semibold">Swagger</span> for team collaboration.
+                                <div className="w-2 h-2 bg-accent-strong rounded-full mt-2 flex-shrink-0"></div>
+                                <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
+                                    Created a <span className="text-accent font-semibold">REST API</span> using ExpressJS and MySQL, ensuring smooth frontend usage by testing with Postman, and provided clear API documentation with <span className="text-accent font-semibold">Swagger</span> for team collaboration.
                                 </p>
                             </div>
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-pink-500 rounded-full mt-2 flex-shrink-0"></div>
-                                <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                                    Successfully collaborated with <span className="text-fuchsia-400 font-semibold">6 member team</span>, demonstrating strong interpersonal skills, and completed the project ahead of schedule.
+                                <div className="w-2 h-2 bg-accent-strong rounded-full mt-2 flex-shrink-0"></div>
+                                <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
+                                    Successfully collaborated with <span className="text-accent font-semibold">6 member team</span>, demonstrating strong interpersonal skills, and completed the project ahead of schedule.
                                 </p>
                             </div>
                         </div>

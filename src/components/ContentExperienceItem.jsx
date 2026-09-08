@@ -5,12 +5,12 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
     
     // Dynamic color palette - easily extensible
     const colorPalette = [
-        { dot: 'bg-pink-500', border: 'border-pink-500/50', shadow: 'shadow-pink-500/30', badge: 'bg-pink-900/50 border-pink-500/50', text: 'text-pink-300', bullet: 'bg-pink-500' },
-        { dot: 'bg-fuchsia-500', border: 'border-fuchsia-500/50', shadow: 'shadow-fuchsia-500/30', badge: 'bg-fuchsia-900/50 border-fuchsia-500/50', text: 'text-fuchsia-300', bullet: 'bg-fuchsia-500' },
-        { dot: 'bg-purple-500', border: 'border-purple-500/50', shadow: 'shadow-purple-500/30', badge: 'bg-purple-900/50 border-purple-500/50', text: 'text-purple-300', bullet: 'bg-purple-500' },
-        { dot: 'bg-violet-500', border: 'border-violet-500/50', shadow: 'shadow-violet-500/30', badge: 'bg-violet-900/50 border-violet-500/50', text: 'text-violet-300', bullet: 'bg-violet-500' },
-        { dot: 'bg-indigo-500', border: 'border-indigo-500/50', shadow: 'shadow-indigo-500/30', badge: 'bg-indigo-900/50 border-indigo-500/50', text: 'text-indigo-300', bullet: 'bg-indigo-500' },
-        { dot: 'bg-rose-500', border: 'border-rose-500/50', shadow: 'shadow-rose-500/30', badge: 'bg-rose-900/50 border-rose-500/50', text: 'text-rose-300', bullet: 'bg-rose-500' },
+        { dot: 'bg-accent-strong', border: 'border-accent/50', shadow: 'shadow-accent/20', badge: 'bg-accent/50 border-accent/50', text: 'text-accent', bullet: 'bg-accent-strong' },
+        { dot: 'bg-accent-strong', border: 'border-accent/50', shadow: 'shadow-accent/20', badge: 'bg-accent/50 border-accent/50', text: 'text-accent', bullet: 'bg-accent-strong' },
+        { dot: 'bg-accent-strong', border: 'border-accent/50', shadow: 'shadow-accent/20', badge: 'bg-accent/50 border-accent/50', text: 'text-accent', bullet: 'bg-accent-strong' },
+        { dot: 'bg-accent-strong', border: 'border-accent/50', shadow: 'shadow-accent/20', badge: 'bg-accent/50 border-accent/50', text: 'text-accent', bullet: 'bg-accent-strong' },
+        { dot: 'bg-accent-strong', border: 'border-accent/50', shadow: 'shadow-accent/20', badge: 'bg-accent/50 border-accent/50', text: 'text-accent', bullet: 'bg-accent-strong' },
+        { dot: 'bg-accent-strong', border: 'border-accent/50', shadow: 'shadow-accent/20', badge: 'bg-accent/50 border-accent/50', text: 'text-accent', bullet: 'bg-accent-strong' },
         { dot: 'bg-cyan-500', border: 'border-cyan-500/50', shadow: 'shadow-cyan-500/30', badge: 'bg-cyan-900/50 border-cyan-500/50', text: 'text-cyan-300', bullet: 'bg-cyan-500' },
         { dot: 'bg-teal-500', border: 'border-teal-500/50', shadow: 'shadow-teal-500/30', badge: 'bg-teal-900/50 border-teal-500/50', text: 'text-teal-300', bullet: 'bg-teal-500' },
         { dot: 'bg-emerald-500', border: 'border-emerald-500/50', shadow: 'shadow-emerald-500/30', badge: 'bg-emerald-900/50 border-emerald-500/50', text: 'text-emerald-300', bullet: 'bg-emerald-500' },
@@ -23,14 +23,14 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
     return (
         <div className="relative group">
             {/* Timeline Dot */}
-            <div className={`hidden md:flex absolute left-6 top-6 w-5 h-5 ${colorScheme.dot} rounded-full border-4 border-black z-10 group-hover:scale-125 transition-transform duration-300 shadow-lg`}></div>
+            <div className={`hidden md:flex absolute left-6 top-6 w-5 h-5 ${colorScheme.dot} rounded-full border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300 shadow-lg`}></div>
             
             {/* Card */}
-            <div className={`md:ml-16 bg-gradient-to-br from-zinc-900 to-zinc-800/50 rounded-xl p-5 sm:p-6 md:p-8 border border-zinc-700 hover:${colorScheme.border} transition-all duration-300 hover:shadow-2xl hover:${colorScheme.shadow}`}>
+            <div className={`md:ml-16 bg-surface rounded-xl p-5 sm:p-6 md:p-8 border border-line hover:${colorScheme.border} transition-all duration-300 hover:shadow-2xl hover:${colorScheme.shadow}`}>
                 {/* Header */}
                 <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-4 mb-4">
                     <div className="flex-1">
-                        <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2">
+                        <h4 className="text-lg sm:text-xl md:text-2xl font-bold text-fg mb-2">
                             {position}
                         </h4>
                         <a href={companyLink} 
@@ -51,9 +51,9 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
                 </div>
                 
                 {/* Date */}
-                <div className="flex items-center gap-2 mb-5 pb-4 border-b border-zinc-700/50">
-                    <i className="ri-calendar-line text-gray-400"></i>
-                    <span className="text-sm sm:text-base text-gray-400">{startDate} - {endDate}</span>
+                <div className="flex items-center gap-2 mb-5 pb-4 border-b border-line/50">
+                    <i className="ri-calendar-line text-fg-muted"></i>
+                    <span className="text-sm sm:text-base text-fg-muted">{startDate} - {endDate}</span>
                 </div>
                 
                 {/* Job Description - Collapsible */}
@@ -62,17 +62,17 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
                         {/* Dropdown Trigger */}
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="w-full flex items-center justify-between gap-2 p-3 rounded-lg bg-zinc-800/50 hover:bg-zinc-800 transition-all duration-200 group/dropdown"
+                            className="w-full flex items-center justify-between gap-2 p-3 rounded-xl bg-raised/50 hover:bg-surface transition-all duration-200 group/dropdown"
                         >
                             <div className="flex items-center gap-2">
-                                <i className="ri-file-list-3-line text-lg text-gray-400 group-hover/dropdown:text-gray-300"></i>
-                                <h5 className="text-sm font-semibold text-gray-300 group-hover/dropdown:text-white">Key Responsibilities</h5>
-                                {/* <span className="text-xs text-gray-500 group-hover/dropdown:text-gray-400">
+                                <i className="ri-file-list-3-line text-lg text-fg-muted group-hover/dropdown:text-fg-muted"></i>
+                                <h5 className="text-sm font-semibold text-fg-muted group-hover/dropdown:text-fg">Key Responsibilities</h5>
+                                {/* <span className="text-xs text-fg-subtle group-hover/dropdown:text-fg-muted">
                                     ({description.length} items)
                                 </span> */}
                             </div>
                             <div className="flex items-center gap-2">
-                                <span className="text-xs text-gray-500 group-hover/dropdown:text-gray-400 hidden sm:inline">
+                                <span className="text-xs text-fg-subtle group-hover/dropdown:text-fg-muted hidden sm:inline">
                                     {isExpanded ? 'Click to hide' : 'Click to view'}
                                 </span>
                                 <i className={`ri-arrow-${isExpanded ? 'up' : 'down'}-s-line text-xl ${colorScheme.text} transition-transform duration-200 ${isExpanded ? 'rotate-0' : ''}`}></i>
@@ -83,7 +83,7 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
                         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isExpanded ? 'max-h-[1000px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
                             <ul className="space-y-2.5 pl-3">
                                 {description.map((desc, idx) => (
-                                    <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-gray-300 leading-relaxed">
+                                    <li key={idx} className="flex items-start gap-3 text-sm sm:text-base text-fg-muted leading-relaxed">
                                         <div className={`w-1.5 h-1.5 ${colorScheme.bullet} rounded-full mt-2 flex-shrink-0`}></div>
                                         <span>{desc}</span>
                                     </li>
@@ -96,13 +96,13 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
                 {/* Tech Stack */}
                 <div>
                     <div className="flex items-center gap-2 mb-3">
-                        <i className="ri-code-s-slash-line text-lg text-gray-400"></i>
-                        <h5 className="text-sm font-semibold text-gray-300">Tech Stack:</h5>
+                        <i className="ri-code-s-slash-line text-lg text-fg-muted"></i>
+                        <h5 className="text-sm font-semibold text-fg-muted">Tech Stack:</h5>
                     </div>
                     <div className="flex flex-wrap gap-2">
                         {techStack.map((stack, idx) => {
                             return (
-                                <span key={idx} className={`text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-lg ${colorScheme.badge} border transition-all duration-200 hover:scale-105`}>
+                                <span key={idx} className={`text-xs sm:text-sm font-semibold px-3 py-1.5 rounded-xl ${colorScheme.badge} border transition-all duration-200 hover:scale-105`}>
                                     {stack}
                                 </span>
                             )

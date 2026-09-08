@@ -11,7 +11,7 @@ const ContentProject = ({ projects }) => {
                     Recent Projects
                     <span className="ml-2 sm:ml-3">🛠️</span>
                 </h3>
-                <p className="text-sm sm:text-base text-gray-400 mt-3 sm:mt-4">Showcasing my latest work and technical expertise</p>
+                <p className="text-sm sm:text-base text-fg-muted mt-3 sm:mt-4">Showcasing my latest work and technical expertise</p>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-10">
                 {latestProjects.map((project, index) => {
@@ -24,7 +24,7 @@ const ContentProject = ({ projects }) => {
             <div className="text-center mt-8">
                 <Link 
                     to="/projects" 
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white font-semibold rounded-xl hover:from-fuchsia-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-fuchsia-500/30"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-accent-strong text-on-accent font-semibold rounded-xl hover:from-accent hover:to-accent transition-all duration-300 shadow-lg hover:shadow-accent/20"
                 >
                     <span>View All Projects</span>
                     <i className="ri-arrow-right-line text-lg"></i>

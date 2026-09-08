@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#0a0f0d" />
     <meta
       name="Firnanda"
       content="Personal Web Portfolio by Firnanda"
@@ -12,6 +12,45 @@
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      // Semantic colour names backed by the CSS variables in src/css/style.css.
+      // <alpha-value> is required: it is what lets utilities such as
+      // bg-surface/50 or border-accent/30 keep their opacity modifier.
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              bg: 'rgb(var(--bg) / <alpha-value>)',
+              surface: 'rgb(var(--surface) / <alpha-value>)',
+              raised: 'rgb(var(--raised) / <alpha-value>)',
+              line: 'rgb(var(--line) / <alpha-value>)',
+              fg: 'rgb(var(--fg) / <alpha-value>)',
+              'fg-muted': 'rgb(var(--fg-muted) / <alpha-value>)',
+              'fg-subtle': 'rgb(var(--fg-subtle) / <alpha-value>)',
+              accent: 'rgb(var(--accent) / <alpha-value>)',
+              'accent-strong': 'rgb(var(--accent-strong) / <alpha-value>)',
+              'accent-alt': 'rgb(var(--accent-alt) / <alpha-value>)',
+              'on-accent': 'rgb(var(--on-accent) / <alpha-value>)',
+            },
+          },
+        },
+      };
+    </script>
+    <script>
+      // Runs before first paint so the page never flashes the wrong theme.
+      // An explicit choice wins; otherwise follow the OS.
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var dark = saved ? saved === 'dark'
+            : window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.toggle('dark', dark);
+        } catch (e) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">

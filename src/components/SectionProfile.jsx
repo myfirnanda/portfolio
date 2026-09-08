@@ -1,4 +1,14 @@
 import { useEffect, useState } from "react";
+import ShapeGrid from "./ShapeGrid";
+import { useTheme } from "../utils/useTheme";
+
+// The canvas paints with ctx.strokeStyle, which cannot read Tailwind classes,
+// so the grid needs the palette as literal values. These mirror the emerald
+// tokens in css/style.css -- keep them in step if those change.
+const GRID_COLORS = {
+    dark: { border: "#1e3a2e", hover: "#2de09a" },
+    light: { border: "#b9d3c3", hover: "#046c4e" },
+};
 
 const words = [
     "Software Engineer",
@@ -12,6 +22,8 @@ const SectionProfile = () => {
     const [wordIndex, setWordIndex] = useState(0);
     const [charIndex, setCharIndex] = useState(0);
     const [isTyping, setIsTyping] = useState(true);
+    const { isDark } = useTheme();
+    const gridColors = isDark ? GRID_COLORS.dark : GRID_COLORS.light;
 
     useEffect(() => {
         let timeout;
@@ -43,75 +55,72 @@ const SectionProfile = () => {
     return (
         <section
             id="profile"
-            className="w-full min-h-screen flex items-center relative overflow-hidden"
-            style={{ backgroundImage: `url("https://www.dropbox.com/scl/fi/chofoaykmx3tpe05su51h/banner-bg.webp?rlkey=cmxv08hz6d5v92vqz7lavbfgu&st=7f35hfa4&raw=1")` }}
+            className="w-full min-h-[100dvh] flex items-center relative overflow-hidden bg-bg"
         >
+            {/* Accent bloom, sized in vw so it scales with the viewport */}
+            <div
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-[80vw] h-[55vw] max-w-[1000px] pointer-events-none z-[2]"
+                style={{ background: 'radial-gradient(ellipse at 35% 50%, rgb(var(--accent) / 0.16), transparent 62%)' }}
+            ></div>
 
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/50"></div>
-            
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div id="profile-description" className="min-h-screen flex flex-col justify-center items-center py-20">
-                    {/* Main Content */}
-                    <div className="mb-4 text-center px-4 animate-fade-in">
-                        {/* Greeting Badge */}
-                        <div className="inline-flex items-center gap-2 px-2 py-1 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 backdrop-blur-sm mb-4">
-                            <span className="text-2xl">👋</span>
-                            <span className="text-sm sm:text-base font-medium text-gray-200">Hello, I'm</span>
-                        </div>
-                        
-                        {/* Name */}
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 leading-tight">
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-pink-200 drop-shadow-2xl">
-                                Mochammad Yoga Firnanda
-                            </span>
+            {/* Animated hexagon grid */}
+            <div className="absolute inset-0 z-[1]">
+                <ShapeGrid
+                    shape="hexagon"
+                    direction="diagonal"
+                    speed={0.2}
+                    squareSize={30}
+                    borderColor={gridColors.border}
+                    hoverFillColor={gridColors.hover}
+                    hoverTrailAmount={3}
+                />
+            </div>
+
+            {/* Asymmetric split: content holds the left 7 of 12 columns and the
+                right stays open so the hexagon field reads as the visual half.
+                taste-skill 4.3 bans a centred hero above DESIGN_VARIANCE 4. */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pointer-events-none">
+                <div id="profile-description" className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 items-center py-24">
+                    <div className="lg:col-span-7 animate-fade-in">
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-5 leading-[1.05] tracking-tight text-fg">
+                            Mochammad Yoga<br />Firnanda
                         </h1>
-                        
-                        {/* Typing Role */}
-                        <div className="text-xl sm:text-2xl md:text-3xl mb-6 min-h-[2.5rem] flex items-center justify-center">
-                            <span className="text-gray-300">I'm a </span>
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-500 to-pink-500 font-bold ml-2">{text}</span>
-                            <span className="blinking-cursor text-fuchsia-500 font-thin">|</span>
+
+                        <p className="text-xl sm:text-2xl md:text-3xl mb-8 min-h-[2.5rem] text-fg-muted">
+                            Building backends and the web, currently as{' '}
+                            <span className="text-accent font-semibold">{text}</span>
+                            <span className="blinking-cursor text-accent font-thin">|</span>
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pointer-events-auto">
+                            <a href="https://www.dropbox.com/scl/fi/ahufskp7jfwj94j2mw9nw/CV_Mochammad-Yoga-Firnanda_2025-2.pdf?rlkey=nb77v7zb00wcgu41o0zavs9y7&st=9994cz18&raw=1"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center gap-2 text-on-accent bg-accent-strong font-medium rounded-xl px-7 py-3.5 transition-transform duration-200 hover:-translate-y-[2px] active:translate-y-0">
+                                <i className="ri-download-2-line text-xl"></i>
+                                Download CV
+                            </a>
+                            <a href="#contact"
+                                className="inline-flex items-center justify-center gap-2 text-fg border border-line hover:border-accent hover:text-accent font-medium rounded-xl px-7 py-3.5 transition-colors duration-200">
+                                <i className="ri-mail-send-line text-xl"></i>
+                                Contact Me
+                            </a>
                         </div>
                     </div>
-                    
-                    {/* Action Buttons */}
-                    <div className="flex flex-row gap-3 sm:gap-5 w-full sm:w-auto px-4 mb-8">
-                        <a href="https://www.dropbox.com/scl/fi/ahufskp7jfwj94j2mw9nw/CV_Mochammad-Yoga-Firnanda_2025-2.pdf?rlkey=nb77v7zb00wcgu41o0zavs9y7&st=9994cz18&raw=1"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex-1 sm:flex-initial">
-                            <button type="button" className="w-full text-white bg-gradient-to-br from-pink-500 to-orange-400 hover:bg-gradient-to-bl hover:shadow-lg hover:shadow-pink-500/50 font-medium rounded-lg px-4 sm:px-8 py-3.5 text-center transition-all duration-300 transform hover:scale-105">
-                                <span className="flex items-center justify-center gap-2 text-sm sm:text-base lg:text-lg">
-                                    <i className="ri-download-2-line text-lg sm:text-xl"></i>
-                                    <p>Download CV</p>
-                                </span>
-                            </button>
-                        </a>
-                        <a href="#contact" className="flex-1 sm:flex-initial">
-                            <button type="button" className="w-full text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l hover:shadow-lg hover:shadow-purple-500/50 font-medium rounded-lg px-4 sm:px-8 py-3.5 text-center transition-all duration-300 transform hover:scale-105">
-                                <span className="flex items-center justify-center gap-2 text-sm sm:text-base lg:text-lg">
-                                    <i className="ri-mail-send-line text-lg sm:text-xl"></i>
-                                    <p>Contact Me</p>
-                                </span>
-                            </button>
-                        </a>
-                    </div>
-                    
-                    {/* Social Links */}
-                    <div className="flex gap-4 animate-fade-in-delay">
-                        <a href="https://github.com/myfirnanda" target="_blank" rel="noopener noreferrer" 
-                           className="w-12 h-12 rounded-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-700 hover:border-purple-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-purple-500/30 group">
-                            <i className="ri-github-fill text-xl text-gray-400 group-hover:text-purple-500 transition-colors"></i>
-                        </a>
-                        <a href="https://www.linkedin.com/in/mochammad-yoga-firnanda/" target="_blank" rel="noopener noreferrer" 
-                           className="w-12 h-12 rounded-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-700 hover:border-blue-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/30 group">
-                            <i className="ri-linkedin-fill text-xl text-gray-400 group-hover:text-blue-500 transition-colors"></i>
-                        </a>
-                        <a href="https://www.instagram.com/firnanda.dev/" target="_blank" rel="noopener noreferrer" 
-                           className="w-12 h-12 rounded-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-700 hover:border-pink-500 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-pink-500/30 group">
-                            <i className="ri-instagram-line text-xl text-gray-400 group-hover:text-pink-500 transition-colors"></i>
-                        </a>
+
+                    {/* Social rail: icons, not a fourth text block, kept out of the
+                        hero stack so the headline reads as one moment. */}
+                    <div className="lg:col-span-5 flex lg:justify-end gap-3 mt-12 lg:mt-0 pointer-events-auto">
+                        {[
+                            { href: 'https://github.com/myfirnanda', icon: 'ri-github-fill', label: 'GitHub' },
+                            { href: 'https://www.linkedin.com/in/mochammad-yoga-firnanda/', icon: 'ri-linkedin-fill', label: 'LinkedIn' },
+                            { href: 'https://www.instagram.com/firnanda.dev/', icon: 'ri-instagram-line', label: 'Instagram' },
+                        ].map((s) => (
+                            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
+                               className="w-12 h-12 rounded-full bg-surface/70 backdrop-blur-sm border border-line hover:border-accent flex items-center justify-center transition-colors duration-200 group">
+                                <i className={`${s.icon} text-xl text-fg-muted group-hover:text-accent transition-colors`}></i>
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>
