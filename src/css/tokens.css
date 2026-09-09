@@ -1,0 +1,75 @@
+/* Hallmark · genre: editorial · theme: Studio · design-system: design.md · designed-as-app
+ * Portable token export. Colours are OKLCH triplets without the oklch() wrapper
+ * so Tailwind can compose them with <alpha-value>: oklch(var(--color-accent) / 0.3).
+ * Storing a wrapped colour here would silently drop every opacity modifier.
+ */
+
+:root {
+  /* Studio · light
+     paper-2 was 90.5% -- only 1.23:1 against paper, too close to read as a
+     raised surface. Dropped to 84% for a real 1.51:1 separation; accent
+     dropped 46%->42% to hold 4.88:1 against the darker card (was heading
+     toward 4.2:1, under AA). Chroma raised 0.020->0.045: contrast is driven
+     by lightness, not chroma, so this reads as a proper sage/mint card
+     instead of a flat desaturated grey without costing any of the above.
+     Every pair re-measured, see design.md. */
+  --color-paper:       97.5% 0.008 150;
+  --color-paper-2:     84% 0.045 150;
+  --color-ink:         21% 0.022 150;
+  --color-ink-2:       44% 0.022 150;
+  --color-rule:        85.5% 0.018 150;
+  --color-accent:      42% 0.115 155;
+  --color-accent-ink:  99% 0 0;
+  --color-focus:       42% 0.115 155;
+
+  --font-display: "Cabinet Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-outlier: "JetBrains Mono", ui-monospace, monospace;
+
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs:  0.75rem;
+  --space-sm:  1rem;
+  --space-md:  1.5rem;
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 7rem;
+
+  /* Perfect fourth, 1.333 */
+  --text-xs:      0.75rem;
+  --text-sm:      0.875rem;
+  --text-md:      1.125rem;
+  --text-lg:      1.5rem;
+  --text-xl:      2rem;
+  --text-2xl:     2.65rem;
+  --text-display: clamp(2.75rem, 7vw, 5.5rem);
+
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:     cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-short:   220ms;
+  --dur-medium:  400ms;
+
+  --rule-hair:    1px;
+  --radius-card:  4px;
+  --radius-input: 4px;
+
+  color-scheme: light;
+}
+
+.dark {
+  /* Studio · dark
+     paper-2 was 26.5% -- 1.28:1 against paper. Raised to 35% for 1.74:1;
+     accent (80%) already clears AAA against the lighter card, untouched. */
+  --color-paper:       15.5% 0.014 155;
+  --color-paper-2:     35% 0.022 155;
+  --color-ink:         94.5% 0.01 150;
+  --color-ink-2:       73.5% 0.015 150;
+  --color-rule:        35.5% 0.024 155;
+  --color-accent:      80% 0.155 158;
+  --color-accent-ink:  16% 0.03 155;
+  --color-focus:       80% 0.155 158;
+
+  color-scheme: dark;
+}

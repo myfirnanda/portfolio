@@ -7,13 +7,14 @@ const ContentProject = ({ projects }) => {
     return (
         <div id="projects" className="pt-16 mb-10">
             <div className="mb-10 sm:mb-12">
-                <h3 className="text-3xl sm:text-4xl md:text-5xl font-bold relative line-heading inline-block">
-                    Recent Projects
-                    <span className="ml-2 sm:ml-3">🛠️</span>
+                <p className="meta mb-3">05</p>
+                <h3 className="text-xl sm:text-2xl flex items-center gap-2 sm:gap-3">
+                    <span>Recent Projects</span>
+                    <span className="text-2xl sm:text-3xl leading-none">🛠️</span>
                 </h3>
                 <p className="text-sm sm:text-base text-fg-muted mt-3 sm:mt-4">Showcasing my latest work and technical expertise</p>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-5 mb-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5 mb-10">
                 {latestProjects.map((project, index) => {
                     const ContentProjectItem = require("./ContentProjectItem").default;
                     return (
@@ -24,7 +25,7 @@ const ContentProject = ({ projects }) => {
             <div className="text-center mt-8">
                 <Link 
                     to="/projects" 
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-accent-strong text-on-accent font-semibold rounded-xl hover:from-accent hover:to-accent transition-all duration-300 shadow-lg hover:shadow-accent/20"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-accent-strong text-on-accent font-semibold rounded-card hover:from-accent hover:to-accent transition-all duration-300 shadow-lg hover:shadow-accent/20"
                 >
                     <span>View All Projects</span>
                     <i className="ri-arrow-right-line text-lg"></i>

@@ -1,4 +1,3 @@
-import ContentCertificate from "./ContentCertificate";
 import ContentContact from "./ContentContact";
 import ContentEducation from "./ContentEducation";
 import ContentExperience from "./ContentExperience";
@@ -14,7 +13,6 @@ const SectionMenuContent = () => {
             <ContentSkill skills={personalData.skills} />
             <ContentEducation />
             <ContentProject projects={personalData.projects} />
-            <ContentCertificate certificates={personalData.certificates} />
             <ContentContact />
         </div>
     )

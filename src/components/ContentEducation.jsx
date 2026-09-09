@@ -2,8 +2,11 @@ const ContentEducation = () => {
     return (
         <div id="education" className="pt-16 mb-10 px-4 sm:px-6">
             <div className="mb-8 sm:mb-10">
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold relative line-heading inline-block mb-3 sm:mb-4">Education</h3>
-                <span className="text-2xl sm:text-3xl ml-1 sm:ml-2">🎓</span>
+                <p className="meta mb-3">03</p>
+                <h3 className="text-xl sm:text-2xl flex items-center gap-2 sm:gap-3">
+                    <span>Education</span>
+                    <span className="text-2xl sm:text-3xl leading-none">🎓</span>
+                </h3>
             </div>
             
             {/* Timeline Container */}
@@ -14,10 +17,10 @@ const ContentEducation = () => {
                 {/* Education Item 1 */}
                 <div className="relative group">
                     {/* Timeline Dot */}
-                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-accent-strong rounded-full border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-accent-strong rounded-card border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300"></div>
                     
                     {/* Card */}
-                    <div className="md:ml-16 bg-surface rounded-xl p-5 sm:p-6 md:p-8 border border-line hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20">
+                    <div className="md:ml-16 bg-surface rounded-card p-5 sm:p-6 md:p-8 border border-line hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20">
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-4">
                             <div className="flex-1">
@@ -46,14 +49,14 @@ const ContentEducation = () => {
                         
                         {/* Details */}
                         <div className="space-y-3">
-                            <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-xl">
-                                <i className="ri-star-fill text-xl text-yellow-500 mt-0.5 flex-shrink-0"></i>
+                            <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-card">
+                                <i className="ri-star-fill text-xl text-accent mt-0.5 flex-shrink-0"></i>
                                 <div>
                                     <span className="font-semibold text-fg">Cumulative GPA:</span>
-                                    <span className="ml-2 text-yellow-400 font-bold">3.88 / 4.00</span>
+                                    <span className="ml-2 text-accent font-bold">3.88 / 4.00</span>
                                 </div>
                             </div>
-                            <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-xl">
+                            <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-card">
                                 <i className="ri-book-open-line text-xl text-accent mt-0.5 flex-shrink-0"></i>
                                 <div>
                                     <span className="font-semibold text-fg block mb-1">Relevant Coursework:</span>
@@ -69,10 +72,10 @@ const ContentEducation = () => {
                 {/* Education Item 2 */}
                 <div className="relative group">
                     {/* Timeline Dot */}
-                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-accent-strong rounded-full border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300"></div>
+                    <div className="hidden md:flex absolute left-6 top-6 w-5 h-5 bg-accent-strong rounded-card border-4 border-bg z-10 group-hover:scale-125 transition-transform duration-300"></div>
                     
                     {/* Card */}
-                    <div className="md:ml-16 bg-surface rounded-xl p-5 sm:p-6 md:p-8 border border-line hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20">
+                    <div className="md:ml-16 bg-surface rounded-card p-5 sm:p-6 md:p-8 border border-line hover:border-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-accent/20">
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-4">
                             <div className="flex-1">
@@ -101,19 +104,19 @@ const ContentEducation = () => {
                         {/* Achievements */}
                         <div className="space-y-3">
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-accent-strong rounded-full mt-2 flex-shrink-0"></div>
+                                <div className="w-2 h-2 bg-accent-strong rounded-card mt-2 flex-shrink-0"></div>
                                 <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
                                     Developed an innovative app with <span className="text-accent font-semibold">CRUD functionalities</span>, authentication, and authorization, integrating with <span className="text-accent font-semibold">GoogleCloud Platform (GCP)</span> services for enhanced performance and scalability.
                                 </p>
                             </div>
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-accent-strong rounded-full mt-2 flex-shrink-0"></div>
+                                <div className="w-2 h-2 bg-accent-strong rounded-card mt-2 flex-shrink-0"></div>
                                 <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
                                     Created a <span className="text-accent font-semibold">REST API</span> using ExpressJS and MySQL, ensuring smooth frontend usage by testing with Postman, and provided clear API documentation with <span className="text-accent font-semibold">Swagger</span> for team collaboration.
                                 </p>
                             </div>
                             <div className="flex items-start gap-3">
-                                <div className="w-2 h-2 bg-accent-strong rounded-full mt-2 flex-shrink-0"></div>
+                                <div className="w-2 h-2 bg-accent-strong rounded-card mt-2 flex-shrink-0"></div>
                                 <p className="text-sm sm:text-base text-fg-muted leading-relaxed">
                                     Successfully collaborated with <span className="text-accent font-semibold">6 member team</span>, demonstrating strong interpersonal skills, and completed the project ahead of schedule.
                                 </p>

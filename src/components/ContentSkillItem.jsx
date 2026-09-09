@@ -1,7 +1,7 @@
 const ContentSkillItem = ({ image, name, width, height }) => {
     return (
         <div className="group relative flex items-center justify-center">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center bg-raised/50 rounded-xl p-2 sm:p-2.5 md:p-3 hover:bg-raised/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent/20">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex items-center justify-center bg-raised/50 rounded-card p-2 sm:p-2.5 md:p-3 hover:bg-raised/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent/20">
                 <img 
                     src={image} 
                     alt={name} 

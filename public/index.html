@@ -21,18 +21,32 @@
         theme: {
           extend: {
             colors: {
-              bg: 'rgb(var(--bg) / <alpha-value>)',
-              surface: 'rgb(var(--surface) / <alpha-value>)',
-              raised: 'rgb(var(--raised) / <alpha-value>)',
-              line: 'rgb(var(--line) / <alpha-value>)',
-              fg: 'rgb(var(--fg) / <alpha-value>)',
-              'fg-muted': 'rgb(var(--fg-muted) / <alpha-value>)',
-              'fg-subtle': 'rgb(var(--fg-subtle) / <alpha-value>)',
-              accent: 'rgb(var(--accent) / <alpha-value>)',
-              'accent-strong': 'rgb(var(--accent-strong) / <alpha-value>)',
-              'accent-alt': 'rgb(var(--accent-alt) / <alpha-value>)',
-              'on-accent': 'rgb(var(--on-accent) / <alpha-value>)',
+              paper: 'oklch(var(--color-paper) / <alpha-value>)',
+              'paper-2': 'oklch(var(--color-paper-2) / <alpha-value>)',
+              ink: 'oklch(var(--color-ink) / <alpha-value>)',
+              'ink-2': 'oklch(var(--color-ink-2) / <alpha-value>)',
+              rule: 'oklch(var(--color-rule) / <alpha-value>)',
+              accent: 'oklch(var(--color-accent) / <alpha-value>)',
+              'accent-ink': 'oklch(var(--color-accent-ink) / <alpha-value>)',
+              focus: 'oklch(var(--color-focus) / <alpha-value>)',
+              // Aliases kept so the existing markup keeps resolving.
+              bg: 'oklch(var(--color-paper) / <alpha-value>)',
+              surface: 'oklch(var(--color-paper-2) / <alpha-value>)',
+              raised: 'oklch(var(--color-paper-2) / <alpha-value>)',
+              line: 'oklch(var(--color-rule) / <alpha-value>)',
+              fg: 'oklch(var(--color-ink) / <alpha-value>)',
+              'fg-muted': 'oklch(var(--color-ink-2) / <alpha-value>)',
+              'fg-subtle': 'oklch(var(--color-ink-2) / <alpha-value>)',
+              'accent-strong': 'oklch(var(--color-accent) / <alpha-value>)',
+              'accent-alt': 'oklch(var(--color-accent) / <alpha-value>)',
+              'on-accent': 'oklch(var(--color-accent-ink) / <alpha-value>)',
             },
+            fontFamily: {
+              display: ['Cabinet Grotesk', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              body: ['IBM Plex Sans', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+              mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+            },
+            borderRadius: { card: '4px', input: '4px' },
           },
         },
       };
@@ -53,7 +67,9 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+    <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@300,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
     <title>Firnanda's Personal Web Portfolio</title>
     <script>

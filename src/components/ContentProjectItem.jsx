@@ -24,20 +24,17 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
     }, [isModalOpen]);
     
     const projectImages = images.length > 0 ? images : [image];
-    // Color schemes for variety
-    const colorSchemes = [
-        { accent: 'from-accent to-accent', border: 'border-accent/50', shadow: 'shadow-accent/20', text: 'text-accent' },
-        { accent: 'from-accent to-accent', border: 'border-accent/50', shadow: 'shadow-accent/20', text: 'text-accent' },
-        { accent: 'from-accent to-accent', border: 'border-accent/50', shadow: 'shadow-accent/20', text: 'text-accent' },
-        { accent: 'from-blue-500 to-cyan-500', border: 'border-accent/50', shadow: 'shadow-blue-500/30', text: 'text-accent' },
-        { accent: 'from-accent to-accent', border: 'border-accent/50', shadow: 'shadow-accent/20', text: 'text-accent' },
-    ];
-    const colorScheme = colorSchemes[index % colorSchemes.length];
+    // Single locked accent per design.md -- no per-card hue rotation.
+    const colorScheme = {
+        border: 'border-accent/50',
+        shadow: 'shadow-accent/20',
+        text: 'text-accent',
+    };
     
     return (
         <>
         <div className="group h-full cursor-pointer" onClick={() => setIsModalOpen(true)}>
-            <div className={`h-full rounded-xl bg-surface border border-line hover:${colorScheme.border} overflow-hidden transition-all duration-300 hover:shadow-2xl hover:${colorScheme.shadow} flex flex-col`}>
+            <div className={`h-full rounded-card bg-surface border border-line hover:${colorScheme.border} overflow-hidden transition-all duration-300 hover:shadow-2xl hover:${colorScheme.shadow} flex flex-col`}>
                 {/* Image Container */}
                 <div className="relative overflow-hidden">
                     <img 
@@ -50,7 +47,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                     
                     {/* Click to View Indicator */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="bg-bg/60 backdrop-blur-sm rounded-full px-6 py-3">
+                        <div className="bg-bg/60 rounded-card px-6 py-3">
                             <span className="text-fg font-medium flex items-center gap-2">
                                 <i className="ri-eye-line text-xl"></i>
                                 View Details
@@ -74,13 +71,13 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                         {techStack.slice(0, 4).map((stack, idx) => (
                             <span 
                                 key={idx}
-                                className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-surface border border-line text-fg-muted hover:border-accent/50 transition-colors duration-200"
+                                className="text-xs font-semibold px-2.5 py-1 rounded-card bg-surface border border-line text-fg-muted hover:border-accent/50 transition-colors duration-200"
                             >
                                 {stack}
                             </span>
                         ))}
                         {techStack.length > 4 && (
-                            <span className="text-xs font-semibold px-2.5 py-1 rounded-xl bg-surface border border-line text-fg-muted">
+                            <span className="text-xs font-semibold px-2.5 py-1 rounded-card bg-surface border border-line text-fg-muted">
                                 +{techStack.length - 4}
                             </span>
                         )}
@@ -90,7 +87,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                     <div className="flex gap-2 pt-3 border-t border-line/50">
                         {linkPreview !== '' && (
                             <a href={linkPreview} target="_blank" rel="noopener noreferrer" className="flex-1" onClick={(e) => e.stopPropagation()}>
-                                <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent-strong hover:from-accent hover:to-accent text-on-accent font-medium text-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:scale-[1.02]">
+                                <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-card bg-accent-strong hover:from-accent hover:to-accent text-on-accent font-medium text-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:scale-[1.02]">
                                     <i className="ri-external-link-line text-base"></i>
                                     <span>Live Demo</span>
                                 </button>
@@ -98,7 +95,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                         )}
                         {linkGithub !== '' && (
                             <a href={linkGithub} target="_blank" rel="noopener noreferrer" className={linkPreview !== '' ? 'flex-1' : 'w-full'} onClick={(e) => e.stopPropagation()}>
-                                <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-surface hover:bg-raised border border-line hover:border-accent/50 text-fg font-medium text-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
+                                <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-card bg-surface hover:bg-raised border border-line hover:border-accent/50 text-fg font-medium text-sm transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
                                     <i className="ri-github-fill text-base"></i>
                                     <span>Code</span>
                                 </button>
@@ -112,17 +109,17 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
         {/* Modal Popup */}
         {isModalOpen && (
             <div 
-                className="fixed inset-0 z-[10000] flex items-center justify-center bg-bg/90 backdrop-blur-sm p-4 animate-fadeIn"
+                className="fixed inset-0 z-[10000] flex items-center justify-center bg-bg/90 p-4 animate-fadeIn"
                 onClick={() => setIsModalOpen(false)}
             >
                 <div 
-                    className="relative max-w-6xl w-full max-h-[90vh] overflow-y-auto bg-surface rounded-xl border border-line"
+                    className="relative max-w-6xl w-full max-h-[90vh] overflow-y-auto bg-surface rounded-card border border-line"
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Close Button */}
                     <button
                         onClick={() => setIsModalOpen(false)}
-                        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-surface hover:bg-red-500 border border-line hover:border-red-500 flex items-center justify-center transition-all duration-300 group"
+                        className="absolute top-4 right-4 z-10 w-10 h-10 rounded-card bg-surface hover:bg-red-500 border border-line hover:border-red-500 flex items-center justify-center transition-all duration-300 group"
                     >
                         <i className="ri-close-line text-2xl text-fg"></i>
                     </button>
@@ -132,7 +129,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                         {/* Left: Image Gallery */}
                         <div className="space-y-4 md:sticky md:top-6 md:self-start">
                             {/* Main Image */}
-                            <div className="relative overflow-hidden rounded-xl border border-line">
+                            <div className="relative overflow-hidden rounded-card border border-line">
                                 <img
                                     src={projectImages[selectedImage]}
                                     alt={title}
@@ -147,7 +144,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                                         <button
                                             key={idx}
                                             onClick={() => setSelectedImage(idx)}
-                                            className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
+                                            className={`flex-shrink-0 w-20 h-20 rounded-card overflow-hidden border-2 transition-all duration-300 ${
                                                 selectedImage === idx 
                                                     ? `${colorScheme.border} shadow-lg` 
                                                     : 'border-line hover:border-line'
@@ -224,7 +221,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                                     {techStack.map((stack, idx) => (
                                         <span 
                                             key={idx}
-                                            className="px-3 py-1.5 rounded-xl bg-surface border border-line text-fg-muted text-sm font-medium"
+                                            className="px-3 py-1.5 rounded-card bg-surface border border-line text-fg-muted text-sm font-medium"
                                         >
                                             {stack}
                                         </span>
@@ -236,7 +233,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                             <div className="flex gap-3 pt-4">
                                 {linkPreview !== '' && (
                                     <a href={linkPreview} target="_blank" rel="noopener noreferrer" className="flex-1">
-                                        <button className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-accent-strong hover:from-accent hover:to-accent text-on-accent font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
+                                        <button className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-card bg-accent-strong hover:from-accent hover:to-accent text-on-accent font-semibold transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
                                             <i className="ri-external-link-line text-lg"></i>
                                             <span>View Live Demo</span>
                                         </button>
@@ -244,7 +241,7 @@ const ContentProjectItem = ({ image, images = [], title, link, description, deta
                                 )}
                                 {linkGithub !== '' && (
                                     <a href={linkGithub} target="_blank" rel="noopener noreferrer" className={linkPreview !== '' ? 'flex-1' : 'w-full'}>
-                                        <button className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-surface hover:bg-raised border border-line hover:border-accent/50 text-fg font-semibold transition-all duration-300">
+                                        <button className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-card bg-surface hover:bg-raised border border-line hover:border-accent/50 text-fg font-semibold transition-all duration-300">
                                             <i className="ri-github-fill text-lg"></i>
                                             <span>View Code</span>
                                         </button>

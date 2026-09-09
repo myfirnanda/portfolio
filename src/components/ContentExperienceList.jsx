@@ -32,7 +32,7 @@ const ContentExperienceList = ({ experiences }) => {
                 <div className="flex justify-center pt-4">
                     <button
                         onClick={() => setShowAll(!showAll)}
-                        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-accent-strong hover:from-accent hover:to-accent rounded-xl font-semibold text-on-accent transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:scale-105"
+                        className="group relative inline-flex items-center gap-2 px-6 py-3 bg-accent-strong hover:from-accent hover:to-accent rounded-card font-semibold text-on-accent transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 hover:scale-105"
                     >
                         <i className={`ri-${showAll ? 'arrow-up' : 'arrow-down'}-s-line text-xl transition-transform duration-200`}></i>
                         <span>

@@ -1,60 +1,67 @@
-/* ===== Theme tokens =====
-   Stored as raw "R G B" channels, not hex, so Tailwind can compose them with
-   opacity modifiers: the config declares rgb(var(--bg) / <alpha-value>), which
-   is what keeps the ~114 existing utilities like bg-surface/50 working. A
-   hex value in a CSS variable would silently drop the /50 instead.
-   Light is the default; .dark on <html> swaps the values. Components never
-   name a literal colour, so a future re-theme happens only in this block. */
-:root {
-    --bg: 228 238 232;
-    --surface: 250 252 251;
-    --raised: 242 247 244;
-    --line: 196 216 203;
-    --fg: 11 23 18;
-    --fg-muted: 69 86 77;
-    --fg-subtle: 87 105 96;
-    --accent: 4 108 78;
-    --accent-strong: 4 108 78;
-    --accent-alt: 15 118 110;
-    --on-accent: 255 255 255;
-    color-scheme: light;
-}
+/* Hallmark · genre: editorial · macrostructure: Split Studio (marketing) +
+ * Portfolio Grid (content) · theme: Studio · design-system: design.md
+ * designed-as-app · accent hue: chromatic-green · enrichment: Tier-A CSS canvas
+ * pre-emit critique: P5 H4 E4 S4 R5 V4
+ */
 
-.dark {
-    --bg: 5 11 8;
-    --surface: 26 44 35;
-    --raised: 34 56 48;
-    --line: 47 74 62;
-    --fg: 234 242 237;
-    --fg-muted: 167 189 177;
-    --fg-subtle: 138 163 150;
-    --accent: 45 224 154;
-    --accent-strong: 16 185 129;
-    --accent-alt: 94 234 212;
-    --on-accent: 3 20 14;
-    color-scheme: dark;
-}
+@import './tokens.css';
 
 html, body {
     scroll-behavior: smooth;
     position: relative;
 }
 
+/* Root overflow uses clip, never hidden: hidden on the root kills
+   position: sticky in the section rail. */
+html, body {
+    overflow-x: clip;
+}
+
 body {
-    background-color: rgb(var(--bg));
-    color: rgb(var(--fg));
+    background-color: oklch(var(--color-paper));
+    color: oklch(var(--color-ink));
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    /* Display type must break inside long words rather than overflow. */
+    overflow-wrap: anywhere;
+    min-width: 0;
+}
+
+/* The outlier face carries one role: machine-set metadata. Two slots only. */
+.meta {
+    font-family: var(--font-outlier);
+    font-weight: 500;
+    font-size: var(--text-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: oklch(var(--color-ink-2));
+}
+
+a:focus-visible, button:focus-visible {
+    outline: 2px solid oklch(var(--color-focus));
+    outline-offset: 2px;
+    /* Never animated: the ring must appear the instant focus lands. */
+    transition: none;
+}
+
+::selection {
+    background: oklch(var(--color-accent) / 0.22);
 }
 
 /* Theme switches are a deliberate user action, so a short cross-fade reads as
-   responsive. Excluded from transform/opacity so hover effects stay snappy. */
+   responsive. Colour only, so hover transforms stay snappy. */
 body, header, section, div, a, button, i, p, span, h1, h2, h3, h4, li, ul {
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    body, header, section, div, a, button, i, p, span, h1, h2, h3, h4, li, ul {
-        transition: none;
-    }
+    transition: background-color var(--dur-short) var(--ease-out),
+                border-color var(--dur-short) var(--ease-out),
+                color var(--dur-short) var(--ease-out);
 }
 
 /* Add padding bottom for mobile navbar */
@@ -64,19 +71,15 @@ body, header, section, div, a, button, i, p, span, h1, h2, h3, h4, li, ul {
     }
 }
 
-h1, h2, h3, h4, h5, h6, p, a, li, span, label, ul, li {
-    font-family: 'Oxanium', sans-serif;
-}
-
 .typing-text {
     white-space: nowrap;
     overflow: hidden;
-    color: rgb(var(--fg));
+    color: oklch(var(--color-ink));
     margin-right: 5px;
 }
 
 .caret {
-    border-right: .15em solid rgb(var(--accent));
+    border-right: .15em solid oklch(var(--color-accent));
     animation: blink 1s infinite;
 }
 
@@ -87,7 +90,7 @@ h3.line-heading::after {
     left: 0;
     width: 75%;
     height: 3px;
-    background-color: rgb(var(--accent));
+    background-color: oklch(var(--color-accent));
 }
 
 h3.line-heading-center::after {
@@ -97,7 +100,7 @@ h3.line-heading-center::after {
     left: 50%;
     width: 75%;
     height: 3px;
-    background-color: rgb(var(--accent));
+    background-color: oklch(var(--color-accent));
     transform: translateX(-50%);
 }
 

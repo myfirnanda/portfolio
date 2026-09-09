@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ShapeGrid from "./ShapeGrid";
 import { useTheme } from "../utils/useTheme";
 
-// The canvas paints with ctx.strokeStyle, which cannot read Tailwind classes,
-// so the grid needs the palette as literal values. These mirror the emerald
-// tokens in css/style.css -- keep them in step if those change.
-const GRID_COLORS = {
-    dark: { border: "#1e3a2e", hover: "#2de09a" },
-    light: { border: "#b9d3c3", hover: "#046c4e" },
+// ctx.strokeStyle cannot read a Tailwind class, so the canvas resolves the
+// tokens itself at paint time. Reading them beats copying hex values here: a
+// literal copy silently drifts the moment tokens.css changes.
+const tokenColor = (name) => {
+    const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return raw ? `oklch(${raw})` : "transparent";
 };
 
 const words = [
@@ -23,7 +23,17 @@ const SectionProfile = () => {
     const [charIndex, setCharIndex] = useState(0);
     const [isTyping, setIsTyping] = useState(true);
     const { isDark } = useTheme();
-    const gridColors = isDark ? GRID_COLORS.dark : GRID_COLORS.light;
+    // Re-read on every theme change; the toggle swaps the variables, not the DOM.
+    // Border reads --color-ink-2, not --color-rule: rule is tuned against
+    // --color-paper (~1.05:1, deliberately faint for decorative dividers), but
+    // the hero now sits on --color-paper-2 -- rule would all but disappear
+    // there. ink-2 holds ~4.7:1 against paper-2 in both themes, so the grid
+    // this canvas draws stays the hero's visible enrichment, not a ghost of one.
+    const gridColors = useMemo(
+        () => ({ border: tokenColor("--color-ink-2"), hover: tokenColor("--color-accent") }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [isDark]
+    );
 
     useEffect(() => {
         let timeout;
@@ -55,16 +65,11 @@ const SectionProfile = () => {
     return (
         <section
             id="profile"
-            className="w-full min-h-[100dvh] flex items-center relative overflow-hidden bg-bg"
+            className="w-full relative overflow-hidden bg-paper-2"
         >
-            {/* Accent bloom, sized in vw so it scales with the viewport */}
-            <div
-                className="absolute left-0 top-1/2 -translate-y-1/2 w-[80vw] h-[55vw] max-w-[1000px] pointer-events-none z-[2]"
-                style={{ background: 'radial-gradient(ellipse at 35% 50%, rgb(var(--accent) / 0.16), transparent 62%)' }}
-            ></div>
-
-            {/* Animated hexagon grid */}
-            <div className="absolute inset-0 z-[1]">
+            {/* Tier-A enrichment: the hexagon canvas is the right half of the
+                diptych. No bloom -- editorial does not do radial glows. */}
+            <div className="absolute inset-y-0 right-0 w-full lg:w-1/2 z-[1]">
                 <ShapeGrid
                     shape="hexagon"
                     direction="diagonal"
@@ -76,52 +81,55 @@ const SectionProfile = () => {
                 />
             </div>
 
-            {/* Asymmetric split: content holds the left 7 of 12 columns and the
-                right stays open so the hexagon field reads as the visual half.
-                taste-skill 4.3 bans a centred hero above DESIGN_VARIANCE 4. */}
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pointer-events-none">
-                <div id="profile-description" className="min-h-[100dvh] grid grid-cols-1 lg:grid-cols-12 items-center py-24">
-                    <div className="lg:col-span-7 animate-fade-in">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-5 leading-[1.05] tracking-tight text-fg">
-                            Mochammad Yoga<br />Firnanda
+            {/* 15 - Split Studio. Text holds the left half, the canvas the
+                right, divided by a hairline rather than a gradient fade. */}
+            <div className="w-full relative z-10 pointer-events-none">
+                <div id="profile-description" className="grid grid-cols-1 lg:grid-cols-2 min-h-[100dvh]">
+                    <div className="flex flex-col justify-center px-4 sm:px-6 lg:px-8 xl:pl-16 py-28 bg-paper-2 lg:border-r border-rule">
+                        <p className="meta mb-6">Backend / Fullstack &middot; Est. 2023</p>
+
+                        <h1 className="text-[clamp(2.75rem,7vw,5.5rem)] mb-6">
+                            Mochammad<br />Yoga Firnanda
                         </h1>
 
-                        <p className="text-xl sm:text-2xl md:text-3xl mb-8 min-h-[2.5rem] text-fg-muted">
-                            Building backends and the web, currently as{' '}
+                        <p className="text-lg sm:text-xl text-ink-2 max-w-[45ch] mb-10">
+                            I build the parts of the web people do not see. Currently working as{' '}
                             <span className="text-accent font-semibold">{text}</span>
                             <span className="blinking-cursor text-accent font-thin">|</span>
                         </p>
 
-                        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 pointer-events-auto">
+                        <div className="flex flex-col sm:flex-row gap-3 pointer-events-auto">
                             <a href="https://www.dropbox.com/scl/fi/ahufskp7jfwj94j2mw9nw/CV_Mochammad-Yoga-Firnanda_2025-2.pdf?rlkey=nb77v7zb00wcgu41o0zavs9y7&st=9994cz18&raw=1"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-2 text-on-accent bg-accent-strong font-medium rounded-xl px-7 py-3.5 transition-transform duration-200 hover:-translate-y-[2px] active:translate-y-0">
-                                <i className="ri-download-2-line text-xl"></i>
+                                className="inline-flex items-center justify-center gap-2 bg-accent text-accent-ink font-semibold rounded-card px-7 py-3.5 transition-transform duration-200 hover:-translate-y-[2px] active:translate-y-0">
+                                <i className="ri-download-2-line text-lg"></i>
                                 Download CV
                             </a>
                             <a href="#contact"
-                                className="inline-flex items-center justify-center gap-2 text-fg border border-line hover:border-accent hover:text-accent font-medium rounded-xl px-7 py-3.5 transition-colors duration-200">
-                                <i className="ri-mail-send-line text-xl"></i>
-                                Contact Me
+                                className="inline-flex items-center justify-center gap-2 border border-rule text-ink hover:border-accent hover:text-accent font-semibold rounded-card px-7 py-3.5 transition-colors duration-200">
+                                <i className="ri-mail-send-line text-lg"></i>
+                                Get in touch
                             </a>
                         </div>
+
+                        <ul className="flex gap-6 mt-12 pointer-events-auto">
+                            {[
+                                { href: 'https://github.com/myfirnanda', label: 'GitHub' },
+                                { href: 'https://www.linkedin.com/in/mochammad-yoga-firnanda/', label: 'LinkedIn' },
+                                { href: 'https://www.instagram.com/firnanda.dev/', label: 'Instagram' },
+                            ].map((s) => (
+                                <li key={s.label}>
+                                    <a href={s.href} target="_blank" rel="noopener noreferrer"
+                                       className="font-mono text-xs tracking-[0.06em] uppercase text-ink-2 hover:text-accent border-b border-transparent hover:border-accent transition-colors">
+                                        {s.label}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
 
-                    {/* Social rail: icons, not a fourth text block, kept out of the
-                        hero stack so the headline reads as one moment. */}
-                    <div className="lg:col-span-5 flex lg:justify-end gap-3 mt-12 lg:mt-0 pointer-events-auto">
-                        {[
-                            { href: 'https://github.com/myfirnanda', icon: 'ri-github-fill', label: 'GitHub' },
-                            { href: 'https://www.linkedin.com/in/mochammad-yoga-firnanda/', icon: 'ri-linkedin-fill', label: 'LinkedIn' },
-                            { href: 'https://www.instagram.com/firnanda.dev/', icon: 'ri-instagram-line', label: 'Instagram' },
-                        ].map((s) => (
-                            <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}
-                               className="w-12 h-12 rounded-full bg-surface/70 backdrop-blur-sm border border-line hover:border-accent flex items-center justify-center transition-colors duration-200 group">
-                                <i className={`${s.icon} text-xl text-fg-muted group-hover:text-accent transition-colors`}></i>
-                            </a>
-                        ))}
-                    </div>
+                    <div className="hidden lg:block" aria-hidden="true"></div>
                 </div>
             </div>
         </section>

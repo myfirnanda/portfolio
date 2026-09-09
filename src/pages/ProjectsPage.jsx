@@ -21,9 +21,10 @@ const ProjectsPage = () => {
                     
                     {/* Page Title */}
                     <div className="mb-10 sm:mb-12">
-                        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold relative line-heading inline-block">
-                            All Projects
-                            <span className="ml-2 sm:ml-3">🛠️</span>
+                        <p className="meta mb-3">Index</p>
+                        <h1 className="text-4xl sm:text-5xl md:text-6xl flex items-center gap-3 sm:gap-4">
+                            <span>All Projects</span>
+                            <span className="text-3xl sm:text-4xl leading-none">🛠️</span>
                         </h1>
                         <p className="text-base sm:text-lg text-fg-muted mt-4 sm:mt-5 max-w-2xl">
                             A complete collection of my projects showcasing technical expertise and creative problem-solving across various technologies.
@@ -32,13 +33,13 @@ const ProjectsPage = () => {
                     
                     {/* Stats */}
                     <div className="flex flex-wrap gap-6 mb-10">
-                        <div className="bg-surface/50 border border-line rounded-xl px-6 py-4">
+                        <div className="bg-surface/50 border border-line rounded-card px-6 py-4">
                             <p className="text-3xl font-bold text-accent">
                                 {personalData.projects.length}
                             </p>
                             <p className="text-sm text-fg-muted">Total Projects</p>
                         </div>
-                        <div className="bg-surface/50 border border-line rounded-xl px-6 py-4">
+                        <div className="bg-surface/50 border border-line rounded-card px-6 py-4">
                             <p className="text-3xl font-bold text-accent">
                                 {[...new Set(personalData.projects.flatMap(p => p.techStack))].length}
                             </p>

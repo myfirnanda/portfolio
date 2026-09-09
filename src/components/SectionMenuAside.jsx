@@ -7,41 +7,35 @@ const SectionMenuAside = () => {
                   </a>
 
                   {/* Desktop Link List */}
-                  <div id="link-list" className="p-4 rounded-xl bg-surface border border-line">
+                  <div id="link-list" className="p-4 rounded-card bg-surface border border-line">
                     <ul className="space-y-1.5">
                       <li>
-                        <a href="#profesional-experiences" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface transition-all duration-200">
+                        <a href="#profesional-experiences" className="group flex items-center gap-3 px-3 py-2.5 rounded-card hover:bg-surface transition-all duration-200">
                           <i className="ri-briefcase-line text-lg text-accent"></i>
                           <span className="text-sm font-medium text-fg-muted group-hover:text-fg">Professional Experiences</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#skills" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface transition-all duration-200">
+                        <a href="#skills" className="group flex items-center gap-3 px-3 py-2.5 rounded-card hover:bg-surface transition-all duration-200">
                           <i className="ri-code-s-slash-line text-lg text-accent"></i>
                           <span className="text-sm font-medium text-fg-muted group-hover:text-fg">Skills & Tech Stack</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#education" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface transition-all duration-200">
+                        <a href="#education" className="group flex items-center gap-3 px-3 py-2.5 rounded-card hover:bg-surface transition-all duration-200">
                           <i className="ri-graduation-cap-line text-lg text-accent"></i>
                           <span className="text-sm font-medium text-fg-muted group-hover:text-fg">Education</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#projects" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface transition-all duration-200">
+                        <a href="#projects" className="group flex items-center gap-3 px-3 py-2.5 rounded-card hover:bg-surface transition-all duration-200">
                           <i className="ri-folder-3-line text-lg text-accent"></i>
                           <span className="text-sm font-medium text-fg-muted group-hover:text-fg">Recent Projects</span>
                         </a>
                       </li>
                       <li>
-                        <a href="#certificate" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface transition-all duration-200">
-                          <i className="ri-award-line text-lg text-amber-500"></i>
-                          <span className="text-sm font-medium text-fg-muted group-hover:text-fg">Certificates</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="#contact" className="group flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-surface transition-all duration-200">
-                          <i className="ri-mail-send-line text-lg text-green-500"></i>
+                        <a href="#contact" className="group flex items-center gap-3 px-3 py-2.5 rounded-card hover:bg-surface transition-all duration-200">
+                          <i className="ri-mail-send-line text-lg text-accent"></i>
                           <span className="text-sm font-medium text-fg-muted group-hover:text-fg">Contact</span>
                         </a>
                       </li>
