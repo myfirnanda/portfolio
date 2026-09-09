@@ -54,10 +54,13 @@ const ContentExperienceItem = ({ image, title, position, status, companyName, co
                 {/* Job Description - Collapsible */}
                 {description && description.length > 0 && (
                     <div className="mb-6">
-                        {/* Dropdown Trigger */}
+                        {/* Dropdown Trigger. affordance-pulse is a slow accent
+                            breathing border/glow -- signals "clickable" before
+                            the visitor ever hovers it. Drops once opened; the
+                            visitor has already found it by then. */}
                         <button
                             onClick={() => setIsExpanded(!isExpanded)}
-                            className="w-full flex items-center justify-between gap-2 p-3 rounded-card bg-raised/50 hover:bg-surface transition-all duration-200 group/dropdown"
+                            className={`w-full flex items-center justify-between gap-2 p-3 rounded-card bg-raised/50 hover:bg-surface transition-all duration-200 group/dropdown border border-transparent ${!isExpanded ? 'affordance-pulse' : ''}`}
                         >
                             <div className="flex items-center gap-2">
                                 <i className="ri-file-list-3-line text-lg text-fg-muted group-hover/dropdown:text-fg-muted"></i>

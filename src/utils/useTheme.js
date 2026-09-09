@@ -1,26 +1,45 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useSyncExternalStore } from 'react';
 
 const STORAGE_KEY = 'theme';
 
-const readTheme = () => {
-    // The inline script in public/index.html has already resolved the theme and
-    // stamped <html> before React mounts, so trusting that class here keeps the
-    // two in sync and avoids a second, conflicting decision.
-    if (typeof document === 'undefined') return 'dark';
-    return document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+/**
+ * One shared subscription to <html>'s class list.
+ *
+ * This used to hold the theme in useState, which gives every caller its own
+ * private copy: clicking the toggle in Header updated Header's copy and
+ * flipped the class, but SectionProfile's copy never changed, so it never
+ * re-rendered and its canvas kept the colours it had read on mount. Anything
+ * styled by CSS variables switched correctly; anything that reads the
+ * variables in JS did not.
+ *
+ * The class on <html> is the single source of truth, so consumers subscribe to
+ * it directly. A MutationObserver also fires *after* the attribute lands,
+ * which matters for callers that resolve CSS custom properties with
+ * getComputedStyle -- a useEffect-driven version would hand them the previous
+ * theme's values for one render.
+ */
+const subscribe = (onStoreChange) => {
+    const observer = new MutationObserver(onStoreChange);
+    observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
 };
 
-/**
- * Reads and controls the site theme. State lives on <html>'s class list, which
- * is what the CSS variables key off; localStorage only records an explicit
- * choice so the OS preference can still lead when the visitor never picked one.
- */
-export const useTheme = () => {
-    const [theme, setTheme] = useState(readTheme);
+const getSnapshot = () =>
+    document.documentElement.classList.contains('dark') ? 'dark' : 'light';
 
-    useEffect(() => {
-        document.documentElement.classList.toggle('dark', theme === 'dark');
-    }, [theme]);
+// No DOM during SSR; the inline script in index.html settles the real value
+// before React mounts on the client.
+const getServerSnapshot = () => 'dark';
+
+const applyTheme = (next) => {
+    document.documentElement.classList.toggle('dark', next === 'dark');
+};
+
+export const useTheme = () => {
+    const theme = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 
     useEffect(() => {
         const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -28,7 +47,7 @@ export const useTheme = () => {
         const onChange = (event) => {
             // Only follow the OS while the visitor has not chosen for themselves.
             if (localStorage.getItem(STORAGE_KEY)) return;
-            setTheme(event.matches ? 'dark' : 'light');
+            applyTheme(event.matches ? 'dark' : 'light');
         };
 
         media.addEventListener('change', onChange);
@@ -36,16 +55,14 @@ export const useTheme = () => {
     }, []);
 
     const toggleTheme = useCallback(() => {
-        setTheme((current) => {
-            const next = current === 'dark' ? 'light' : 'dark';
-            try {
-                localStorage.setItem(STORAGE_KEY, next);
-            } catch (e) {
-                // Private mode or blocked storage: the theme still applies for
-                // this page view, it just will not be remembered.
-            }
-            return next;
-        });
+        const next = getSnapshot() === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        try {
+            localStorage.setItem(STORAGE_KEY, next);
+        } catch (e) {
+            // Private mode or blocked storage: the theme still applies for
+            // this page view, it just will not be remembered.
+        }
     }, []);
 
     return { theme, isDark: theme === 'dark', toggleTheme };

@@ -151,6 +151,38 @@ h3.line-heading-center::after {
   animation: fadeIn 0.2s ease-out;
 }
 
+/* Idle affordance for elements that are clickable but give no cue at rest
+   (the collapsible triggers). A slow accent breathing border + soft glow,
+   not a colour shift or scale change -- reads as an invitation, not a badge.
+   Pauses on hover/focus so it never fights the interaction it announces;
+   collapses to a static ring under prefers-reduced-motion via the global
+   animation-duration override below. */
+@keyframes affordance-pulse {
+  0%, 100% {
+    border-color: oklch(var(--color-accent) / 0.16);
+    box-shadow: 0 0 0 0 oklch(var(--color-accent) / 0);
+  }
+  /* Held from 20% to 65% of the cycle (~1.5s of a 3.4s loop) instead of a
+     single instant at 50% -- a triangle wave reads as a blip, this reads as
+     lit. Blur radius (the "16px" below) is what lets the glow bleed outside
+     the border; spread-only ("0 0 0 3px") draws a hard ring, not light. */
+  20%, 65% {
+    border-color: oklch(var(--color-accent) / 0.65);
+    box-shadow: 0 0 18px 5px oklch(var(--color-accent) / 0.28);
+  }
+}
+
+.affordance-pulse {
+  animation: affordance-pulse 3.4s var(--ease-in-out) infinite;
+}
+
+.affordance-pulse:hover,
+.affordance-pulse:focus-visible {
+  animation-play-state: paused;
+  border-color: transparent;
+  box-shadow: none;
+}
+
 /* taste-skill 6.B: every animation collapses to static under reduced motion. */
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {

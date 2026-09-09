@@ -25,9 +25,9 @@ const ContentEducation = () => {
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-4 mb-4">
                             <div className="flex-1">
                                 <h4 className="text-xl sm:text-2xl font-bold text-fg mb-1">
-                                    National Development University
+                                    National Development University Veteran of East Java
                                 </h4>
-                                <h4 className="text-base sm:text-xl text-accent">Veteran of East Java</h4>
+                                {/* <h4 className="text-base sm:text-xl text-accent"></h4> */}
                             </div>
                             <div className="flex items-center gap-2 text-sm sm:text-base text-fg-muted">
                                 <i className="ri-map-pin-line text-accent"></i>
@@ -36,7 +36,7 @@ const ContentEducation = () => {
                         </div>
                         
                         {/* Degree & Date */}
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-5 pb-4 border-b border-line/50">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 border-b border-line/50">
                             <div className="flex items-center gap-2">
                                 <i className="ri-graduation-cap-fill text-xl text-accent"></i>
                                 <h4 className="text-base sm:text-lg font-semibold text-accent">Bachelor of Computer Science</h4>
@@ -48,7 +48,7 @@ const ContentEducation = () => {
                         </div>
                         
                         {/* Details */}
-                        <div className="space-y-3">
+                        {/* <div className="space-y-3">
                             <div className="flex items-start gap-3 p-3 bg-raised/50 rounded-card">
                                 <i className="ri-star-fill text-xl text-accent mt-0.5 flex-shrink-0"></i>
                                 <div>
@@ -65,7 +65,7 @@ const ContentEducation = () => {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 

@@ -1,6 +1,6 @@
 const SectionMenuAside = () => {
     return (
-        <div id="rocket" className="hidden lg:block lg:col-span-3 w-full sticky top-12 h-[100dvh]">
+        <div id="rocket" className="hidden lg:block lg:col-span-3 w-full sticky top-20 h-[100dvh]">
                   {/* Animated Rocket Image */}
                   <a href="#introduction" id="profile-picture" className="w-full flex justify-center animate-up-down">
                     <img src="https://www.dropbox.com/scl/fi/u4j60zhklts7nsm680z4g/img2.webp?rlkey=gl6pm7td5pu26axt5wxs5xz6z&st=py0js3zo&raw=1" alt="Rocket Guy" />

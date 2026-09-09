@@ -5,9 +5,9 @@ import { useTheme } from "../utils/useTheme";
 // ctx.strokeStyle cannot read a Tailwind class, so the canvas resolves the
 // tokens itself at paint time. Reading them beats copying hex values here: a
 // literal copy silently drifts the moment tokens.css changes.
-const tokenColor = (name) => {
+const tokenColor = (name, alpha = 1) => {
     const raw = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    return raw ? `oklch(${raw})` : "transparent";
+    return raw ? `oklch(${raw} / ${alpha})` : "transparent";
 };
 
 const words = [
@@ -24,13 +24,17 @@ const SectionProfile = () => {
     const [isTyping, setIsTyping] = useState(true);
     const { isDark } = useTheme();
     // Re-read on every theme change; the toggle swaps the variables, not the DOM.
-    // Border reads --color-ink-2, not --color-rule: rule is tuned against
-    // --color-paper (~1.05:1, deliberately faint for decorative dividers), but
-    // the hero now sits on --color-paper-2 -- rule would all but disappear
-    // there. ink-2 holds ~4.7:1 against paper-2 in both themes, so the grid
-    // this canvas draws stays the hero's visible enrichment, not a ghost of one.
+    // Dark mode's border used to read --color-ink-2 -- a neutral, near-zero-
+    // chroma text token -- while hover read full --color-accent. Same
+    // lightness band, wildly different chroma (0.015 vs 0.155): a washed-out
+    // grey grid with a single hyper-saturated hexagon popping out on hover.
+    // Dark's border is now the accent itself, dimmed via alpha, so idle and
+    // hover read as one hue at two intensities. Light mode already read fine
+    // on ink-2 -- left untouched, this is a dark-only fix.
     const gridColors = useMemo(
-        () => ({ border: tokenColor("--color-ink-2"), hover: tokenColor("--color-accent") }),
+        () => (isDark
+            ? { border: tokenColor("--color-accent", 0.7), hover: tokenColor("--color-accent") }
+            : { border: tokenColor("--color-ink-2"), hover: tokenColor("--color-accent") }),
         // eslint-disable-next-line react-hooks/exhaustive-deps
         [isDark]
     );
